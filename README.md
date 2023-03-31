@@ -1,14 +1,14 @@
 # Algorhythm
 
-## Members & bContributions
+## Members & Contributions
 
 #### Anthony Andujar
 
 #### Harleen Chahal
-Sprite and sprite's animation.
+- Sprite and sprite's animation.
 
 #### Andrew Geraci
-Buttons.
+- Buttons.
 
 #### Yuhan Lin
-Layout and background.
+- Layout and background.
