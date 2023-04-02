@@ -8,10 +8,25 @@ export default class GameScene extends Phaser.Scene {
 
 	preload() {
 		this.load.image('dude', 'assets/sprites/placerDude.jpg');
+		this.load.audio('generic_music', 'assets/genericmusic.mp3');
 	}
 
 	create() {
 		const player = this.physics.add.image(400,300,'dude');
+		
+		const music = this.sound.add('generic_music');
+		
+		const musicConfig = {
+			mute: false,
+			volume: 1,
+			rate: 1,
+			detune: 0,
+			seek: 0,
+			loop: false,
+			deplay: 0
+		};
+
+		music.play(musicConfig);
 		
 		const Left = this.add.circle(50, 50, 20, 0xFF0000);
 		Left.setInteractive();
