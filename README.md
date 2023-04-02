@@ -3,6 +3,7 @@
 ## Members & Contributions
 
 #### Anthony Andujar
+- Music/Sound implementation
 
 #### Harleen Chahal
 - Sprite and sprite's animation.
