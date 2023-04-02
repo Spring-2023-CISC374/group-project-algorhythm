@@ -8,7 +8,7 @@
 - Sprite and sprite's animation.
 
 #### Andrew Geraci
-- Buttons.
+- Buttons to move sprite.
 
 #### Yuhan Lin
 - Layout and background.
