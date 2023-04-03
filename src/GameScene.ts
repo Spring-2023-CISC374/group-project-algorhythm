@@ -9,10 +9,11 @@ export default class GameScene extends Phaser.Scene {
 	preload() {
 		this.load.image('dude', 'assets/sprites/placerDude.jpg');
 		this.load.audio('generic_music', 'assets/genericmusic.mp3');
+		this.load.spritesheet('guy', 'assets/algsprite.png', { frameWidth: 32, frameHeight: 48})
 	}
 
 	create() {
-		const player = this.physics.add.image(400,300,'dude');
+		const player = this.physics.add.sprite(100, 450, 'guy');
 		
 		const music = this.sound.add('generic_music');
 		
@@ -58,13 +59,38 @@ export default class GameScene extends Phaser.Scene {
 		this.add.text(180, 42, 'Down');
 
 		
-	}
+	
 
-	left(){
+	/* left(){
 		this.player.setX(30);
+	} */
+
+	this.anims.create({
+		key: 'left',
+		frames: this.anims.generateFrameNumbers('guy', {
+				start: 4, end: 7
+		}),
+		frameRate: 10,
+		repeat: -1
+		})
+	
+	this.anims.create({
+		key: 'turn',
+		frames: [{ key: 'guy', frame: 0 }],
+		frameRate: 20
+	})
+
+	this.anims.create({
+		key: 'right',
+		frames: this.anims.generateFrameNumbers('guy', {
+			start: 8, end: 11
+		}),
+		frameRate: 10,
+		repeat: -1
+		})
 	}
 
 	update() {
-
+//
 	}
 }
