@@ -9,9 +9,12 @@ export default class GameScene extends Phaser.Scene {
 	preload() {
 		this.load.image('dude', 'assets/sprites/placerDude.jpg');
 		this.load.audio('generic_music', 'assets/genericmusic.mp3');
+		this.load.image('button', 'assets/images/tmpButton.png');
 	}
 
 	create() {
+		const button = this.add.image(400, 300, 'button');
+		
 		const player = this.physics.add.image(400,300,'dude');
 		
 		const music = this.sound.add('generic_music');
