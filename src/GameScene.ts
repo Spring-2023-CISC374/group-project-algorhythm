@@ -2,92 +2,71 @@ import Phaser from 'phaser'
 
 export default class GameScene extends Phaser.Scene {
 	constructor() {
-		super('hello-world')
+		super('bootGame')
 	}
-
-
+	
 	preload() {
-		this.load.image('dude', 'assets/sprites/placerDude.jpg');
-		this.load.audio('generic_music', 'assets/genericmusic.mp3');
-		this.load.spritesheet('guy', 'assets/algsprite.png', { frameWidth: 32, frameHeight: 48})
+		this.load.spritesheet('guy_up', "../assets/sprite_up.png", {frameWidth: 64, frameHeight: 51});
+		this.load.spritesheet('guy_down', "../assets/sprite_down.png", {frameWidth: 64, frameHeight: 51});
+		this.load.spritesheet('guy_left', "../assets/sprite_left.png", {frameWidth: 64, frameHeight: 51});
+		this.load.spritesheet('guy_right', "../assets/sprite_right.png", {frameWidth: 64, frameHeight: 51});
 	}
-
 	create() {
-		const player = this.physics.add.sprite(100, 450, 'guy');
-		
-		const music = this.sound.add('generic_music');
-		
-		const musicConfig = {
-			mute: false,
-			volume: 1,
-			rate: 1,
-			detune: 0,
-			seek: 0,
-			loop: false,
-			deplay: 0
-		};
+		const player = this.physics.add.sprite(100,100,'guy_up');
 
-		music.play(musicConfig);
+		// Animations
+		this.anims.create({
+			key: 'up',
+			frames: this.anims.generateFrameNumbers('guy_up', {start:0, end:3}), frameRate: 13, repeat: -1
+		});
+		this.anims.create({
+			key: 'down',
+			frames: this.anims.generateFrameNumbers('guy_down', {start:0, end:3}), frameRate: 13, repeat: -1
+		});
+		this.anims.create({
+			key: 'left',
+			frames: this.anims.generateFrameNumbers('guy_left', {start:0, end:3}), frameRate: 13, repeat: -1
+		});
+		this.anims.create({
+			key: 'right',
+			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
+		});
 		
+		this.movePlayer(player);
+	}
+	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody) {
 		const Left = this.add.circle(50, 50, 20, 0xFF0000);
 		Left.setInteractive();
 		Left.on('pointerup', function() {
 			player.x -= 30
+			player.play('left')
 		});
 
 		const Right = this.add.circle(100, 50, 20, 0xFF0000);
 		Right.setInteractive();
 		Right.on('pointerup', function() {
 			player.x += 30
+			player.play('right')
 		});
 
 		const Up = this.add.circle(150, 50, 20, 0xFF0000);
 		Up.setInteractive();
 		Up.on('pointerup', function() {
 			player.y -= 30
+			player.play('up')
 		});
 
 		const Down = this.add.circle(200, 50, 20, 0xFF0000);
 		Down.setInteractive();
 		Down.on('pointerup', function() {
 			player.y += 30
+			player.play('down')
 		});
 
 		this.add.text(30, 42, 'Left');
 		this.add.text(78, 42, 'Right');
 		this.add.text(133, 42, 'Up');
 		this.add.text(180, 42, 'Down');
-
-		
-	
-
-	/* left(){
-		this.player.setX(30);
-	} */
-
-	this.anims.create({
-		key: 'left',
-		frames: this.anims.generateFrameNumbers('guy', {
-				start: 4, end: 7
-		}),
-		frameRate: 10,
-		repeat: -1
-		})
-	
-	this.anims.create({
-		key: 'turn',
-		frames: [{ key: 'guy', frame: 0 }],
-		frameRate: 20
-	})
-
-	this.anims.create({
-		key: 'right',
-		frames: this.anims.generateFrameNumbers('guy', {
-			start: 8, end: 11
-		}),
-		frameRate: 10,
-		repeat: -1
-		})
 	}
 
 	update() {
