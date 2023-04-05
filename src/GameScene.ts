@@ -10,6 +10,7 @@ export default class GameScene extends Phaser.Scene {
 		this.load.spritesheet('guy_down', "../assets/sprite_down.png", {frameWidth: 64, frameHeight: 51});
 		this.load.spritesheet('guy_left', "../assets/sprite_left.png", {frameWidth: 64, frameHeight: 51});
 		this.load.spritesheet('guy_right', "../assets/sprite_right.png", {frameWidth: 64, frameHeight: 51});
+		this.load.audio('genericMusic', ".../assets/genericmusic.mp3");
 	}
 	create() {
 		const player = this.physics.add.sprite(100,100,'guy_up');
@@ -67,6 +68,8 @@ export default class GameScene extends Phaser.Scene {
 		this.add.text(78, 42, 'Right');
 		this.add.text(133, 42, 'Up');
 		this.add.text(180, 42, 'Down');
+
+		//this.sound.add('genericMusic', {loop: true});
 	}
 
 	update() {
