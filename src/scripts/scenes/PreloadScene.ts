@@ -35,15 +35,24 @@ export default class PreloadScene extends Phaser.Scene {
 
       //images 
         this.load.image('instruction','assets/images/instruction.png');
+        this.load.image('star','assets/images/star.png');
 
       //music
         this.load.audio('genericMusic', "assets/musics/genericmusic.mp3");
 
       //sound effects
-
+      //chaos
+        this.load.audio("c1_sound", "assets/sounds/c.mp3");
+        this.load.audio("d2_sound", "assets/sounds/d.mp3");
+        this.load.audio("e3_sound", "assets/sounds/e.mp3");
+        this.load.audio("f4_sound", "assets/sounds/f.mp3");
+        this.load.audio("g5_sound", "assets/sounds/g.mp3");
+        this.load.audio("a6_sound", "assets/sounds/a.mp3");
+        this.load.audio("b7_sound", "assets/sounds/b.mp3");
+        this.load.audio("c8_sound", "assets/sounds/c2.mp3");
     }
 
     create() {
-      this.scene.start('TutorialScene');
+      this.scene.start('TitleScene');
 	}
 }
