@@ -1,17 +1,12 @@
 import Phaser from 'phaser'
 
 export default class GameScene extends Phaser.Scene {
+	private bgm?: Phaser.Sound.BaseSound
+
 	constructor() {
-		super('bootGame')
+		super({key: 'GameScene'})
 	}
 	
-	preload() {
-		this.load.spritesheet('guy_up', "../assets/sprite_up.png", {frameWidth: 64, frameHeight: 51});
-		this.load.spritesheet('guy_down', "../assets/sprite_down.png", {frameWidth: 64, frameHeight: 51});
-		this.load.spritesheet('guy_left', "../assets/sprite_left.png", {frameWidth: 64, frameHeight: 51});
-		this.load.spritesheet('guy_right', "../assets/sprite_right.png", {frameWidth: 64, frameHeight: 51});
-		this.load.audio('genericMusic', ".../assets/genericmusic.mp3");
-	}
 	create() {
 		const player = this.physics.add.sprite(100,100,'guy_up');
 
@@ -69,7 +64,8 @@ export default class GameScene extends Phaser.Scene {
 		this.add.text(133, 42, 'Up');
 		this.add.text(180, 42, 'Down');
 
-		//this.sound.add('genericMusic', {loop: true});
+		this.bgm = this.sound.add('genericMusic', {loop: true});
+		this.bgm.play()
 	}
 
 	update() {
