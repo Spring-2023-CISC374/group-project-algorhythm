@@ -12,4 +12,5 @@
 - Buttons to move sprite.
 
 #### Yuhan Lin
-- Layout and background.
+- Creating different scenes for future game content.
+- Work with layout and background.
