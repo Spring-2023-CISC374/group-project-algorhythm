@@ -27,8 +27,7 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     goToTutorial(){
-        //this.scene.start('TutorialScene');
-        this.scene.start('LevelScene');
+        this.scene.start('TutorialScene');
     }
 
     goToLevel(){
