@@ -5,7 +5,6 @@ export default class TutorialScene extends Phaser.Scene {
     private instruction?: any
     private path?: any
     private question?: any
-    private bgm?: Phaser.Sound.BaseSound
     private soundC?: Phaser.Sound.BaseSound
     private soundG?: Phaser.Sound.BaseSound
     private soundA?: Phaser.Sound.BaseSound
@@ -18,7 +17,7 @@ export default class TutorialScene extends Phaser.Scene {
     }
   
     create() {
-        this.add.image(400, 300, 'city')
+        this.add.image(400, 300, 'mountain')
 
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
@@ -95,14 +94,26 @@ export default class TutorialScene extends Phaser.Scene {
 		this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG);
 
         //add instruction
-        this.creatInstuction();
+        /* this.creatInstuction();
 
         this.input.once('pointerdown', () => {
             this.instruction.destroy();
             this.instruction = null;
         });
 
-        this.instruction.setInteractive();
+        this.instruction.setInteractive(); */
+
+        //add trees 
+        this.add.image(660, 200, 'tree1')
+        this.add.image(760, 455, 'tree2')
+        this.add.image(800, 255, 'tree3')
+        this.add.image(550, 255, 'bush1')
+        this.add.image(450, 200, 'tree3')
+        this.add.image(480, 350, 'rock2')
+        this.add.image(430, 420, 'stump2')
+        this.add.image(630, 420, 'bush2')
+        this.add.image(660, 520, 'bush2')
+        this.add.image(680, 450, 'bush2')
 	}
     
 	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
@@ -144,8 +155,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.text(590, 742, 'Up');
 		this.add.text(680, 742, 'Down');
 
-		//this.bgm = this.sound.add('genericMusic', {loop: true});
-		//this.bgm.play()
+		
 	}
 
     private handleArrive(){
