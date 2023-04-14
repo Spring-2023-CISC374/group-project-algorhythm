@@ -57,7 +57,7 @@ export default class TutorialScene extends Phaser.Scene {
         
 
 
-        const player = this.physics.add.sprite(340,320,'guy_up');
+        const player = this.physics.add.sprite(340,320,'guy_right');
 
         //add sounds
         //need to fix
