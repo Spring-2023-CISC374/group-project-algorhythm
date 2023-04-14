@@ -34,6 +34,16 @@ export default class PreloadScene extends Phaser.Scene {
 
 
       //images 
+        this.load.image('bush1','assets/images/bush1.png');
+        this.load.image('bush2','assets/images/bush2.png');
+        this.load.image('tree1','assets/images/tree1.png');
+        this.load.image('tree2','assets/images/tree2.png');
+        this.load.image('tree3','assets/images/tree3.png');
+        this.load.image('rock1','assets/images/rock1.png');
+        this.load.image('rock2','assets/images/rock2.png');
+        this.load.image('rock3','assets/images/rock3.png');
+        this.load.image('stump1','assets/images/stump1.png');
+        this.load.image('stump2','assets/images/stump2.png');
         this.load.image('instruction','assets/images/instruction.png');
         this.load.image('star','assets/images/star.png');
 
