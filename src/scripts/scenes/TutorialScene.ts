@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 
 export default class TutorialScene extends Phaser.Scene {
-    private levelText?: Phaser.GameObjects.Text
     private instruction?: any
     private path?: any
     private question?: any
@@ -27,7 +26,7 @@ export default class TutorialScene extends Phaser.Scene {
 
         this.question = this.add.image(1100, 50, 'mark')
         .setInteractive()
-        .on('pointerdown', ()=>this.creatInstuction());
+        .on('pointerdown', ()=>this.instruction.setVisible(true));
         this.question.setScale(0.8);
 
         //add buttons images
@@ -42,9 +41,9 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.image(675, 625, 'staffpaper')
 
         //add level text
-        this.levelText = this.add.text(16, 16, 'Tutorial', {
+        this.add.text(16, 16, 'Tutorial', {
 			fontSize: '32px', 
-			fill: '#FFFFFF'
+			color: '#FFFFFF'
 		})
 
         //add note
@@ -93,15 +92,7 @@ export default class TutorialScene extends Phaser.Scene {
 		
 		this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG);
 
-        //add instruction
-        /* this.creatInstuction();
-
-        this.input.once('pointerdown', () => {
-            this.instruction.destroy();
-            this.instruction = null;
-        });
-
-        this.instruction.setInteractive(); */
+        
 
         //add trees 
         this.add.image(660, 200, 'tree1')
@@ -114,6 +105,11 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.image(630, 420, 'bush2')
         this.add.image(660, 520, 'bush2')
         this.add.image(680, 450, 'bush2')
+
+        //add instruction
+        this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
+        .on('pointerdown', ()=>this.instruction.setVisible(false));
+        
 	}
     
 	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
@@ -171,7 +167,7 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     creatInstuction(){
-        this.instruction = this.add.image(650, 400, 'instruction');
+        this.instruction = this.add.image(650, 400, 'instruction').setInteractive();
     }
 
     removeInstruction(){
