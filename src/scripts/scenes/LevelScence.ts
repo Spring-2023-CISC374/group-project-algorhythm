@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 
 export default class LevelScene extends Phaser.Scene {
-    private levelText?: Phaser.GameObjects.Text
 
     constructor() {
       super({ key: 'LevelScene' });
@@ -22,9 +21,9 @@ export default class LevelScene extends Phaser.Scene {
         this.add.image(675, 625, 'staffpaper')
 
         //add level text
-        this.levelText = this.add.text(16, 16, 'Level 1', {
+        this.add.text(16, 16, 'Level 1', {
 			fontSize: '32px', 
-			fill: '#FFFFFF'
+			color: '#FFFFFF'
 		})
 
         //add note

@@ -11,7 +11,7 @@ export default class TitleScene extends Phaser.Scene{
     
     create(){
         this.add.image(400, 300, 'city')
-        this.add.text(70, 100, "Algorhythm", { fill: "#222222", font: "120px Times New Roman"})
+        this.add.text(70, 100, "Algorhythm", { color: "#222222", font: "120px Times New Roman"})
 
         this.button1 = this.add.rectangle(600, 500, 200, 100, 0xdadaaa)
         /* .setInteractive()
@@ -28,8 +28,8 @@ export default class TitleScene extends Phaser.Scene{
 		this.bgm.play()
 
         //add texts on buttons
-        this.add.text(575, 485, "Level", { fill: "#222222", font: "20px Times New Roman"})
-        this.add.text(170, 485, "Tutorial", { fill: "#222222", font: "20px Times New Roman"})
+        this.add.text(575, 485, "Level", { color: "#222222", font: "20px Times New Roman"})
+        this.add.text(170, 485, "Tutorial", { color: "#222222", font: "20px Times New Roman"})
     }
 
     goToTutorial(){
