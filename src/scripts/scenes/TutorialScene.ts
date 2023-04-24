@@ -1,59 +1,18 @@
 import Phaser from 'phaser'
+import LevelScene from './LevelScence'
 
-export default class TutorialScene extends Phaser.Scene {
-    private instruction?: any
-    private path?: any
-    private question?: any
+export default class TutorialScene extends LevelScene {
     private soundC?: Phaser.Sound.BaseSound
     private soundG?: Phaser.Sound.BaseSound
     private soundA?: Phaser.Sound.BaseSound
     private soundD?: Phaser.Sound.BaseSound
-    private goal?: any
-    private player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
 
     constructor() {
-      super({ key: 'TutorialScene' });
+      super('TutorialScene');
     }
   
     create() {
-        this.add.image(400, 300, 'mountain')
-
-        //add menu?
-        this.path = this.add.image(1220, 50, 'arrow')
-        .setInteractive()
-        .on('pointerdown', ()=>this.goToTitle());
-        this.path.setScale(0.8);
-
-        this.question = this.add.image(1100, 50, 'mark')
-        .setInteractive()
-        .on('pointerdown', ()=>this.instruction.setVisible(true));
-        this.question.setScale(0.8);
-
-        //add buttons images
-        this.add.image(600, 755, 'button')
-		this.add.image(500, 755, 'button')
-        this.add.image(400, 755, 'button')
-        this.add.image(900, 755, 'button')
-        this.add.image(800, 755, 'button')
-        this.add.image(700, 755, 'button')
-
-        //add staff paper images
-        this.add.image(675, 625, 'staffpaper')
-
-        //add level text
-        this.add.text(16, 16, 'Tutorial', {
-			fontSize: '32px', 
-			color: '#FFFFFF'
-		})
-
-        //add note
-        this.add.image(85, 320, 'note')
-
-        //add map
-        this.add.image(650, 320, 'map')
-
-        
-
+        super.create('mountain', 'Tutorial');
 
         const player = this.physics.add.sprite(340,320,'guy_right');
 
@@ -154,19 +113,7 @@ export default class TutorialScene extends Phaser.Scene {
 		
 	}
 
-    private handleArrive(){
-        this.scene.start('EndScene');
-    }
-
-    goToTitle(){
-        this.scene.start('TitleScene');
-    }
-
-    goToEnd(){
-        this.scene.start('EndScene');
-    }
-
-    creatInstuction(){
+    createInstuction(){
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive();
     }
 
