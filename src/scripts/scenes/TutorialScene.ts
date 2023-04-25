@@ -52,8 +52,14 @@ export default class TutorialScene extends Phaser.Scene {
         //add map
         this.add.image(650, 320, 'map')
 
-        
+        //add bounds
+        this.physics.world.setBounds(325, 50, 730, 530);
 
+        /* const group = this.physics.add.group({
+            key: 'guy_right',
+            frameQuantity: 48,
+            collideWorldBounds: true,
+        }); */
 
         const player = this.physics.add.sprite(340,320,'guy_right');
 
