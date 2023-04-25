@@ -16,6 +16,7 @@ export default class TestScene extends Phaser.Scene {
     private up?: any
     private down?: any
     private start?:any
+    private inputIndex?: number = 0
 
     constructor() {
       super({ key: 'TestScene' });
@@ -97,7 +98,7 @@ export default class TestScene extends Phaser.Scene {
 
         this.start = this.add.circle(800, 750, 20, 0xFF0000);
         this.start.setInteractive()
-        .on('pointerdown', ()=>this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput))
+        .on('pointerdown', ()=>this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput, this.inputIndex))
 
 
         this.editInput(this.userInput);
@@ -115,6 +116,7 @@ export default class TestScene extends Phaser.Scene {
 
 		//this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput);
 
+        this.inputIndex = 0;
 	}
 
     editInput(userInput:Array<string>){
@@ -137,33 +139,53 @@ export default class TestScene extends Phaser.Scene {
     }
     
 	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
-        soundG: Phaser.Sound.BaseSound, soundA: Phaser.Sound.BaseSound, soundD: Phaser.Sound.BaseSound, userInput:Array<string>) {
-            userInput.forEach((input) => {
-                if (input === "left"){
+        soundG: Phaser.Sound.BaseSound, soundA: Phaser.Sound.BaseSound, soundD: Phaser.Sound.BaseSound, 
+        userInput:Array<string>, inputIndex: number) {
+            /* console.log("Array length: ",userInput.length)
+            console.log("input index: ",inputIndex)
+            console.log("before if") */
+            if (inputIndex < userInput.length) {
+               /*  console.log("In moveplayer!")
+                console.log(inputIndex) */
+                if (userInput[inputIndex] === "left"){
                     player.x -= 105
                     player.play('left')
                     soundA.play()
-                    console.log(input)
+                    //console.log(userInput[inputIndex])
+                    inputIndex++
                 }
-                else if(input === "right"){
+                else if(userInput[inputIndex] === "right"){
                     player.x += 105
                     player.play('right')
                     soundD.play()
-                    console.log(input)
+                    //console.log(userInput[inputIndex])
+                    inputIndex++
+                    //console.log("update index: ", inputIndex)
                 }
-                else if(input === "up"){
+                else if(userInput[inputIndex] === "up"){
                     player.y -= 105
                     player.play('up')
                     soundC.play()
-                    console.log(input)
+                    //console.log(userInput[inputIndex])
+                    inputIndex++
                 }
                 else{
                     player.y += 105
                     player.play('down')
                     soundG.play()
-                    console.log(input)
+                    //console.log(userInput[inputIndex])
+                    inputIndex++
                 }
-            })
+                //console.log("after move, going to loop")
+                setTimeout(() => this.movePlayer(player, soundC, soundG, soundA, soundD, userInput, inputIndex), 500);
+
+            }
+            else{
+                //console.log("arrive the end of the loop")
+                userInput.length = 0;
+                inputIndex = 0;
+                //console.log("empty array and counter")
+            }
         }
 
     private handleArrive(){
