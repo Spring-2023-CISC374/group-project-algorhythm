@@ -1,19 +1,14 @@
 import Phaser from 'phaser'
+import LevelScene from './LevelScence'
 
-export default class TutorialScene extends Phaser.Scene {
-    private levelText?: Phaser.GameObjects.Text
-    private instruction?: any
-    private path?: any
-    private question?: any
+export default class TutorialScene extends LevelScene {
     private soundC?: Phaser.Sound.BaseSound
     private soundG?: Phaser.Sound.BaseSound
     private soundA?: Phaser.Sound.BaseSound
     private soundD?: Phaser.Sound.BaseSound
-    private goal?: any
-    private player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
 
     constructor() {
-      super({ key: 'TutorialScene' });
+      super('TutorialScene');
     }
   
     create() {
@@ -27,7 +22,7 @@ export default class TutorialScene extends Phaser.Scene {
 
         this.question = this.add.image(1100, 50, 'mark')
         .setInteractive()
-        .on('pointerdown', ()=>this.creatInstuction());
+        .on('pointerdown', ()=>this.createInstuction());
         this.question.setScale(0.8);
 
         //add buttons images
@@ -56,7 +51,7 @@ export default class TutorialScene extends Phaser.Scene {
         
 
 
-        this.player = this.physics.add.sprite(340,320,'guy_right');
+        const player = this.physics.add.sprite(340,320,'guy_right');
 
         //add sounds
         //need to fix
@@ -93,15 +88,7 @@ export default class TutorialScene extends Phaser.Scene {
 		
 		this.movePlayer(this.player, this.soundA, this.soundC, this.soundD, this.soundG);
 
-        //add instruction
-        /* this.creatInstuction();
-
-        this.input.once('pointerdown', () => {
-            this.instruction.destroy();
-            this.instruction = null;
-        });
-
-        this.instruction.setInteractive(); */
+        
 
         //add trees 
         this.add.image(660, 200, 'tree1')
@@ -114,7 +101,11 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.image(630, 420, 'bush2')
         this.add.image(660, 520, 'bush2')
         this.add.image(680, 450, 'bush2')
-        this.physics.add.collider(this.player, this.goal, this.handleArrive, undefined, this);
+
+        //add instruction
+        this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
+        .on('pointerdown', ()=>this.instruction.setVisible(false));
+        
 	}
     
 	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
@@ -158,20 +149,8 @@ export default class TutorialScene extends Phaser.Scene {
 		
 	}
 
-    private handleArrive(){
-        this.scene.start('EndScene');
-    }
-
-    goToTitle(){
-        this.scene.start('TitleScene');
-    }
-
-    goToEnd(){
-        this.scene.start('EndScene');
-    }
-
-    creatInstuction(){
-        this.instruction = this.add.image(650, 400, 'instruction');
+    createInstuction(){
+        this.instruction = this.add.image(650, 400, 'instruction').setInteractive();
     }
 
     removeInstruction(){
