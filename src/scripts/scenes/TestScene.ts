@@ -4,13 +4,13 @@ export default class TestScene extends Phaser.Scene {
     private instruction?: any
     private path?: any
     private question?: any
-    private soundC?: Phaser.Sound.BaseSound
-    private soundG?: Phaser.Sound.BaseSound
-    private soundA?: Phaser.Sound.BaseSound
-    private soundD?: Phaser.Sound.BaseSound
+    private soundC!: Phaser.Sound.BaseSound
+    private soundG!: Phaser.Sound.BaseSound
+    private soundA!: Phaser.Sound.BaseSound
+    private soundD!: Phaser.Sound.BaseSound
     private goal?: any
     private player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
-    private userInput?: Array<string> = []
+    private userInput!: Array<string>
     private left?: any
     private right?: any
     private up?: any
@@ -19,8 +19,8 @@ export default class TestScene extends Phaser.Scene {
     private delete?: any
     private deleteAll?: any
     private inputIndex?: number = 0
-    private noteX? = 400
-    private noteY? = 620 
+    private noteX = 400
+    private noteY = 620 
     private noteGroup?: Phaser.GameObjects.Group
     private message?: any
 
@@ -29,8 +29,6 @@ export default class TestScene extends Phaser.Scene {
     }
   
     create() {
-    
-
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
@@ -115,6 +113,7 @@ export default class TestScene extends Phaser.Scene {
         //add group to notes
         this.noteGroup = this.add.group();
 
+        this.userInput = []
         this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup);
         
         //add instruction
