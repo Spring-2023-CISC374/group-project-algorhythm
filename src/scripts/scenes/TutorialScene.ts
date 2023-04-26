@@ -56,7 +56,7 @@ export default class TutorialScene extends Phaser.Scene {
         
 
 
-        const player = this.physics.add.sprite(340,320,'guy_right');
+        this.player = this.physics.add.sprite(340,320,'guy_right');
 
         //add sounds
         //need to fix
@@ -91,7 +91,7 @@ export default class TutorialScene extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
 		
-		this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG);
+		this.movePlayer(this.player, this.soundA, this.soundC, this.soundD, this.soundG);
 
         //add instruction
         /* this.creatInstuction();
@@ -114,6 +114,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.add.image(630, 420, 'bush2')
         this.add.image(660, 520, 'bush2')
         this.add.image(680, 450, 'bush2')
+        this.physics.add.collider(this.player, this.goal, this.handleArrive, undefined, this);
 	}
     
 	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
@@ -154,7 +155,6 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.text(478, 742, 'Right');
 		this.add.text(590, 742, 'Up');
 		this.add.text(680, 742, 'Down');
-
 		
 	}
 
