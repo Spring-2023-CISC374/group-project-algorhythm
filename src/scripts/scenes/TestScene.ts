@@ -17,6 +17,7 @@ export default class TestScene extends Phaser.Scene {
     private down?: any
     private start?:any
     private delete?: any
+    private deleteAll?: any
     private inputIndex?: number = 0
     private message?: any;
 
@@ -105,6 +106,8 @@ export default class TestScene extends Phaser.Scene {
         this.delete = this.add.circle(900, 750, 20, 0xFF0000);
         this.delete.setInteractive();
 
+        this.deleteAll = this.add.circle(1000, 750, 20, 0xFF0000);
+        this.deleteAll.setInteractive();
 
         this.editInput(this.userInput);
 
@@ -119,6 +122,7 @@ export default class TestScene extends Phaser.Scene {
 		this.add.text(680, 742, 'Down');
         this.add.text(775, 742, 'Start');
         this.add.text(875, 742, 'Delete');
+        this.add.text(975, 742, 'Delete\n All');
 
 		//this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput);
 
@@ -145,6 +149,10 @@ export default class TestScene extends Phaser.Scene {
             });
             this.delete.on('pointerdown', function() {
                 userInput.pop()
+                console.log(userInput)
+            });
+            this.deleteAll.on('pointerdown', function() {
+                userInput.length = 0;
                 console.log(userInput)
             });
         }
