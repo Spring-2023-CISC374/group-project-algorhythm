@@ -19,7 +19,10 @@ export default class TestScene extends Phaser.Scene {
     private delete?: any
     private deleteAll?: any
     private inputIndex?: number = 0
-    private message?: any;
+    private noteX? = 400
+    private noteY? = 620 
+    private noteGroup?: Phaser.GameObjects.Group
+    private message?: any
 
     constructor() {
       super({ key: 'TestScene' });
@@ -108,9 +111,11 @@ export default class TestScene extends Phaser.Scene {
 
         this.deleteAll = this.add.circle(1000, 750, 20, 0xFF0000);
         this.deleteAll.setInteractive();
+        
+        //add group to notes
+        this.noteGroup = this.add.group();
 
-        this.editInput(this.userInput);
-
+        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup);
         
         //add instruction
         //this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
@@ -124,36 +129,67 @@ export default class TestScene extends Phaser.Scene {
         this.add.text(875, 742, 'Delete');
         this.add.text(975, 742, 'Delete\n All');
 
+
+        
 		//this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput);
 
+        
         this.inputIndex = 0;
 	}
 
-    editInput(userInput:Array<string>){
+    private destroyLast(noteGroup: Phaser.GameObjects.Group) {
+        const last = noteGroup.getChildren()[noteGroup.getChildren().length - 1] as Phaser.GameObjects.Text;
+
+        if (last !== null) {
+            last.destroy();
+        }
+    }
+
+    editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group){
         if (userInput.length <= 15){
-            this.left.on('pointerdown', function() {
+            this.left.on('pointerdown', () => {
                 userInput.push("left")
+                noteGroup.add(this.add.text(noteX, noteY, "←", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteX += 25
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
-            this.right.on('pointerdown', function() {
+            this.right.on('pointerdown', () => {
                 userInput.push("right")
+                noteGroup.add(this.add.text(noteX, noteY, "→", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteX += 25
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
-            this.up.on('pointerdown', function() {
+            this.up.on('pointerdown', () => {
                 userInput.push("up")
+                noteGroup.add(this.add.text(noteX, noteY, "↑", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteX += 25
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
-            this.down.on('pointerdown', function() {
+            this.down.on('pointerdown', () => {
                 userInput.push("down")
+                noteGroup.add(this.add.text(noteX, noteY, "↓", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteX += 25
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
-            this.delete.on('pointerdown', function() {
+            this.delete.on('pointerdown', () => {
                 userInput.pop()
+                if(noteX > 400){
+                    noteX -= 25
+                }
+                this.destroyLast(noteGroup)
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
-            this.deleteAll.on('pointerdown', function() {
+            this.deleteAll.on('pointerdown', () => {
                 userInput.length = 0;
+                noteX = 400
+                noteGroup.clear(true, true);
                 console.log(userInput)
+                console.log("noteX = ",noteX)
             });
         }
         /* else{
