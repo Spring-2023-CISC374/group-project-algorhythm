@@ -10,7 +10,6 @@ export default class PreloadScene extends Phaser.Scene {
       //test images
         this.load.image("ada", "assets/images/ada.png");
 
-
       // background
         this.load.image('city', 'assets/images/city.png');
         this.load.image('mountain', 'assets/images/mountain.png');        
