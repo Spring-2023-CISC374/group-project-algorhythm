@@ -38,6 +38,6 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     goToLevel(){
-        this.scene.start('TitleScene');
+        this.scene.start('LevelScene');
     }
 }
