@@ -4,7 +4,8 @@ export default class BaseScene extends Phaser.Scene {
     protected instruction?: any
     protected path?: any
     protected question?: any
-    protected goal?: any
+    protected goals!: Phaser.Physics.Arcade.Group
+    protected goalsLeft!: number
     protected player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
     protected userInput!: Array<string>
     protected left?: any
@@ -30,7 +31,7 @@ export default class BaseScene extends Phaser.Scene {
       super(KeyName);
     }
   
-    create(imageName: string, levelName: string) {
+    create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string) {
         this.add.image(400, 300, imageName)
 
         this.inputIndex = 0;
@@ -117,6 +118,13 @@ export default class BaseScene extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
 
+        //this.player = this.physics.add.sprite(340, 320, 'guy_right');
+        this.player = this.physics.add.sprite(playerX, playerY, playerState);
+        this.goals = this.physics.add.group();
+        this.goalsLeft = 0;
+
+        this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
+
 
 
         //add instruction
@@ -133,6 +141,19 @@ export default class BaseScene extends Phaser.Scene {
 
         
 	}
+
+    onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
+        const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+        const goal = goalObj as Phaser.Physics.Arcade.Sprite;
+    
+        goal.destroy();
+    
+        this.goalsLeft--;
+    
+        if (this.goalsLeft === 0) {
+            this.scene.start('EndScene');
+        }
+    }
 
     private destroyLast(noteGroup: Phaser.GameObjects.Group) {
         const last = noteGroup.getChildren()[noteGroup.getChildren().length - 1] as Phaser.GameObjects.Text;
@@ -226,7 +247,7 @@ export default class BaseScene extends Phaser.Scene {
                     soundDown.play()
                     inputIndex++
                 }
-                setTimeout(() => this.movePlayer(player, soundLeft, soundRight, soundUp, soundDown, userInput, inputIndex), 500);
+                setTimeout(() => this.movePlayer(player, soundLeft, soundRight, soundUp, soundDown, userInput, inputIndex), 700);
 
             }
             else{
@@ -234,10 +255,6 @@ export default class BaseScene extends Phaser.Scene {
                 inputIndex = 0;
             }
         }
-
-    private handleArrive(){
-        this.scene.start('EndScene');
-    }
 
     goToTitle(){
         this.scene.start('TitleScene');
