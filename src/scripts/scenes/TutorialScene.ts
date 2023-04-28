@@ -12,44 +12,7 @@ export default class TutorialScene extends LevelScene {
     }
   
     create() {
-        this.add.image(400, 300, 'mountain')
-
-        //add menu?
-        this.path = this.add.image(1220, 50, 'arrow')
-        .setInteractive()
-        .on('pointerdown', ()=>this.goToTitle());
-        this.path.setScale(0.8);
-
-        this.question = this.add.image(1100, 50, 'mark')
-        .setInteractive()
-        .on('pointerdown', ()=>this.createInstuction());
-        this.question.setScale(0.8);
-
-        //add buttons images
-        this.add.image(600, 755, 'button')
-		this.add.image(500, 755, 'button')
-        this.add.image(400, 755, 'button')
-        this.add.image(900, 755, 'button')
-        this.add.image(800, 755, 'button')
-        this.add.image(700, 755, 'button')
-
-        //add staff paper images
-        this.add.image(675, 625, 'staffpaper')
-
-        //add level text
-        this.levelText = this.add.text(16, 16, 'Tutorial', {
-			fontSize: '32px', 
-			fill: '#FFFFFF'
-		})
-
-        //add note
-        this.add.image(85, 320, 'note')
-
-        //add map
-        this.add.image(650, 320, 'map')
-
-        
-
+        super.create('mountain', 'Tutorial');
 
         const player = this.physics.add.sprite(340,320,'guy_right');
 
@@ -60,13 +23,17 @@ export default class TutorialScene extends LevelScene {
         this.soundA = this.sound.add("a6_sound")
         this.soundD = this.sound.add("d2_sound")
 
-        this.goal = this.add.image(655,320,'star')
+        const goal = this.add.image(655,320,'star')
         .setInteractive()
         .on('pointerdown', ()=>this.goToEnd());
         this.path.setScale(0.8);
 
-        /* this.physics.add.collider(this.player, this.goal)
-		this.physics.add.overlap(this.player, this.goal, this.handleArrive, undefined, this)  */
+        console.log('precollider');
+
+        this.physics.add.collider(goal, player, this.goToEnd,undefined,this)
+		//this.physics.add.overlap(goal, player, this.goToEnd, undefined, this) 
+
+        console.log('postcollider');
 
 		// Animations
 		this.anims.create({
@@ -86,7 +53,7 @@ export default class TutorialScene extends LevelScene {
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
 		
-		this.movePlayer(this.player, this.soundA, this.soundC, this.soundD, this.soundG);
+		this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG);
 
         
 
@@ -146,6 +113,7 @@ export default class TutorialScene extends LevelScene {
 		this.add.text(478, 742, 'Right');
 		this.add.text(590, 742, 'Up');
 		this.add.text(680, 742, 'Down');
+
 		
 	}
 

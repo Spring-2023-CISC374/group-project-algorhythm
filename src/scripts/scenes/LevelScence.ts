@@ -4,7 +4,7 @@ export default class LevelScene extends Phaser.Scene {
     protected path?: any
     protected instruction?: any
     protected question?: any
-    protected goal?: any
+    protected goal?: Phaser.Types.Physics.Arcade.ImageWithStaticBody
     protected player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
     constructor(KeyName: string) {
       super(KeyName);
@@ -90,15 +90,12 @@ export default class LevelScene extends Phaser.Scene {
 		
 	}
 
-    private handleArrive(){
-        this.scene.start('EndScene');
-    }
-
     goToTitle(){
         this.scene.start('TitleScene');
     }
 
     goToEnd(){
+        console.log('end scene')
         this.scene.start('EndScene');
     }
     
