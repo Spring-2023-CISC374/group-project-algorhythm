@@ -2,10 +2,11 @@ import Phaser from 'phaser'
 
 import TitleScene from './scenes/TitleScene'
 import PreloadScene from './scenes/PreloadScene'
-import LevelScene from './scenes/LevelScence'
+import BaseScene from './scenes/BaseScence'
 import TutorialScene from './scenes/TutorialScene'
 import TestScene from './scenes/TestScene'
 import EndScene from './scenes/EndScene'
+import GameScene from './scenes/GameScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -19,7 +20,7 @@ const config: Phaser.Types.Core.GameConfig = {
 			debug: false
 		},
 	},
-	scene: [PreloadScene, LevelScene, TitleScene, TutorialScene, TestScene, EndScene],
+	scene: [PreloadScene, BaseScene, TitleScene, TutorialScene, TestScene, EndScene, GameScene],
 	
 }
 
