@@ -40,8 +40,8 @@ export default class TutorialScene extends BaseScene {
         this.add.image(680, 450, 'bush2')
 
         //add instruction
-        this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
-        .on('pointerdown', ()=>this.instruction.setVisible(false));
+        this.instruction.setVisible(true)
+
         
 		this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
 	}

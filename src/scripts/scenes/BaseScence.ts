@@ -129,6 +129,7 @@ export default class BaseScene extends Phaser.Scene {
         //add instruction
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
         .on('pointerdown', ()=>this.instruction.setVisible(false));
+        this.instruction.setDepth(2)
         
         this.add.text(380, 742, 'Left');
 		this.add.text(478, 742, 'Right');
