@@ -16,6 +16,10 @@ export default class TutorialScene extends LevelScene {
 
         const player = this.physics.add.sprite(340,320,'guy_right');
 
+		player.setCollideWorldBounds(true)
+
+		//this.physics.world.setBounds(32, 20, 576, 240);
+
         //add sounds
         //need to fix
         this.soundC = this.sound.add("c1_sound")
