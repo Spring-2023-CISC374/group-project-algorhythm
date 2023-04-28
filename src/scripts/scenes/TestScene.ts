@@ -8,8 +8,11 @@ export default class TestScene extends Phaser.Scene {
     private soundG!: Phaser.Sound.BaseSound
     private soundA!: Phaser.Sound.BaseSound
     private soundD!: Phaser.Sound.BaseSound
-    private goal?: any
-    private player?: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
+    //施工中
+    private goals?: Phaser.Physics.Arcade.Group
+    private goalsLeft!: number
+    //施工中
+    private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
     private userInput!: Array<string>
     private left?: any
     private right?: any
@@ -51,7 +54,7 @@ export default class TestScene extends Phaser.Scene {
         
 
 
-        const player = this.physics.add.sprite(340,320,'guy_right');
+        
 
         //add sounds
         //need to fix
@@ -60,15 +63,26 @@ export default class TestScene extends Phaser.Scene {
         this.soundA = this.sound.add("a6_sound")
         this.soundD = this.sound.add("d2_sound")
 
-        this.goal = this.add.image(655,320,'star')
+        /* this.goal = this.add.image(655,320,'star')
         .setInteractive()
         .on('pointerdown', ()=>this.goToEnd());
-        this.path.setScale(0.8);
+        this.path.setScale(0.8); */
+        
+        //施工中
+        this.player = this.physics.add.sprite(340,320,'guy_right');
+        this.goals = this.physics.add.group();
+        this.goalsLeft = 0;
+        const goal1 = this.physics.add.sprite(655, 320, 'star');
+        this.goals.add(goal1);
+        this.goalsLeft++
 
-        /* this.physics.add.collider(this.player, this.goal)
-		this.physics.add.overlap(this.player, this.goal, this.handleArrive, undefined, this)  */
+        this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
 
-		// Animations
+
+
+        //施工中
+        
+        // Animations
 		this.anims.create({
 			key: 'up',
 			frames: this.anims.generateFrameNumbers('guy_up', {start:0, end:3}), frameRate: 13, repeat: -1
@@ -102,7 +116,7 @@ export default class TestScene extends Phaser.Scene {
 
         this.start = this.add.circle(800, 750, 20, 0xFF0000);
         this.start.setInteractive()
-        .on('pointerdown', ()=>this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput, this.inputIndex))
+        .on('pointerdown', ()=>this.movePlayer(this.player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput, this.inputIndex))
 
         this.delete = this.add.circle(900, 750, 20, 0xFF0000);
         this.delete.setInteractive();
@@ -135,6 +149,19 @@ export default class TestScene extends Phaser.Scene {
         
         this.inputIndex = 0;
 	}
+
+    onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
+        const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+        const goal = goalObj as Phaser.Physics.Arcade.Sprite;
+    
+        goal.destroy();
+        this.goalsLeft--;
+    
+        if (this.goalsLeft === 0) {
+            this.scene.start('EndScene');
+        }
+      }
+        
 
     private destroyLast(noteGroup: Phaser.GameObjects.Group) {
         const last = noteGroup.getChildren()[noteGroup.getChildren().length - 1] as Phaser.GameObjects.Text;
