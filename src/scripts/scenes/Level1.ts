@@ -7,26 +7,25 @@ export default class Level1 extends BaseScene {
     }
     
     create() {
-      super.create('mountain', 'Level 1');
-
-      this.add.image(650,32,"map")
-      
-      this.player = this.physics.add.sprite(444, 20, 'guy_down');
+      super.create('mountain', 'Level 1', 444, 20, 'guy_down');
+      this.add.image(650, 32, 'map');
 
       //add sounds
-      //need to fix
       this.soundUp = this.sound.add("g5_sound")
       this.soundDown = this.sound.add("d2_sound")
       this.soundLeft = this.sound.add("c1_sound")
       this.soundRight = this.sound.add("e3_sound")
 
-      this.goal = this.add.image(865,320,'star')
-      .setInteractive()
-      .on('pointerdown', ()=>this.goToEnd());
-      this.path.setScale(0.8);
+      const goal1 = this.physics.add.sprite(865, 320, 'star');
+      const goal2 = this.physics.add.sprite(550, 30, 'star');
+      const goal3 = this.physics.add.sprite(445, 130, 'star');
+      const goal4 = this.physics.add.sprite(760, 515, 'star');
+      this.goals.add(goal1);
+      this.goals.add(goal2);
+      this.goals.add(goal3);
+      this.goals.add(goal4);
+      this.goalsLeft = 4
 
-      /* this.physics.add.collider(this.player, this.goal)
-  this.physics.add.overlap(this.player, this.goal, this.handleArrive, undefined, this)  */
   
       //add trees 
       this.add.image(560, 420, 'tree1').setScale(1.7)

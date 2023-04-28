@@ -118,13 +118,12 @@ export default class BaseScene extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
 
-        //this.player = this.physics.add.sprite(340, 320, 'guy_right');
         this.player = this.physics.add.sprite(playerX, playerY, playerState);
+        this.player.setDepth(1)
         this.goals = this.physics.add.group();
         this.goalsLeft = 0;
 
         this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
-
 
 
         //add instruction
@@ -138,8 +137,6 @@ export default class BaseScene extends Phaser.Scene {
         this.add.text(775, 742, 'Start');
         this.add.text(875, 742, 'Delete');
         this.add.text(975, 742, 'Delete\n All');
-
-        
 	}
 
     onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {

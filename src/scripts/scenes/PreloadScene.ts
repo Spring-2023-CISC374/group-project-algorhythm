@@ -64,7 +64,7 @@ export default class PreloadScene extends Phaser.Scene {
       //this.scene.start('TitleScene');
       
       //Shortcut
-      this.scene.start('TutorialScene');
+      this.scene.start('Level1');
       //this.scene.start('TestScene');
     }
 }
