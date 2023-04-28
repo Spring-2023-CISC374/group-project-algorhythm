@@ -63,14 +63,14 @@ export default class TutorialScene extends LevelScene {
         this.add.image(800, 255, 'tree3')
         this.add.image(550, 255, 'bush1')
         this.add.image(450, 200, 'tree3')
-        this.add.image(480, 350, 'rock2')
+        this.add.image(480, 350, 'rock1')
         this.add.image(430, 420, 'stump2')
         this.add.image(630, 420, 'bush2')
         this.add.image(660, 520, 'bush2')
         this.add.image(680, 450, 'bush2')
 
         //add instruction
-        this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
+        this.instruction = this.add.image(650, 400, 'instructions').setInteractive()
         .on('pointerdown', ()=>this.instruction.setVisible(false));
         
 	}
@@ -118,7 +118,7 @@ export default class TutorialScene extends LevelScene {
 	}
 
     createInstuction(){
-        this.instruction = this.add.image(650, 400, 'instruction').setInteractive();
+        this.instruction = this.add.image(650, 400, 'instructions').setInteractive();
     }
 
     removeInstruction(){
