@@ -1,37 +1,50 @@
 import Phaser from 'phaser'
 
-export default class TestScene extends Phaser.Scene {
-    private instruction?: any
-    private path?: any
-    private question?: any
-    private soundC!: Phaser.Sound.BaseSound
-    private soundG!: Phaser.Sound.BaseSound
-    private soundA!: Phaser.Sound.BaseSound
-    private soundD!: Phaser.Sound.BaseSound
-    //施工中
-    private goals?: Phaser.Physics.Arcade.Group
-    private goalsLeft!: number
-    //施工中
-    private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
-    private userInput!: Array<string>
-    private left?: any
-    private right?: any
-    private up?: any
-    private down?: any
-    private start?:any
-    private delete?: any
-    private deleteAll?: any
-    private inputIndex?: number = 0
-    private noteX = 400
-    private noteY = 620 
-    private noteGroup?: Phaser.GameObjects.Group
-    private message?: any
+export default class BaseScene extends Phaser.Scene {
+    protected instruction?: any
+    protected path?: any
+    protected question?: any
+    protected goals!: Phaser.Physics.Arcade.Group
+    protected goalsLeft!: number
+    protected player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody
+    protected userInput!: Array<string>
+    protected left?: any
+    protected right?: any
+    protected up?: any
+    protected down?: any
+    protected start?:any
+    protected delete?: any
+    protected deleteAll?: any
+    protected inputIndex!: number
+    protected noteX = 400
+    protected noteY = 620 
+    protected noteGroup?: Phaser.GameObjects.Group
+    protected message?: any
 
-    constructor() {
-      super({ key: 'TestScene' });
+    protected soundLeft!: Phaser.Sound.BaseSound
+    protected soundRight!: Phaser.Sound.BaseSound
+    protected soundUp!: Phaser.Sound.BaseSound
+    protected soundDown!: Phaser.Sound.BaseSound
+
+
+    constructor(KeyName: string) {
+      super(KeyName);
     }
   
-    create() {
+    create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string) {
+        this.add.image(400, 300, imageName)
+
+        this.inputIndex = 0;
+
+        //add buttons images
+        this.add.image(400, 755, 'button')
+        this.add.image(500, 755, 'button')
+        this.add.image(600, 755, 'button')
+		this.add.image(700, 755, 'button')
+        this.add.image(800, 755, 'button')
+        this.add.image(900, 755, 'button')
+        this.add.image(1000, 755, 'button')
+        
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
@@ -43,44 +56,49 @@ export default class TestScene extends Phaser.Scene {
         .on('pointerdown', ()=>this.instruction.setVisible(true));
         this.question.setScale(0.8);
 
-
         //add staff paper images
         this.add.image(675, 625, 'staffpaper')
 
+        //add level text
+        this.add.text(16, 16, levelName, {
+			fontSize: '32px', 
+			color: '#222222'
+		})
+
+        //add note
+        this.add.image(85, 320, 'note')
 
         //add map
         this.add.image(650, 320, 'map')
 
+        //add buttons
+        this.left = this.add.circle(400, 750, 20, 0xFF0000);
+		this.left.setInteractive();
+
+        this.right = this.add.circle(500, 750, 20, 0xFF0000);
+		this.right.setInteractive();
+
+        this.up = this.add.circle(600, 750, 20, 0xFF0000);
+		this.up.setInteractive();
+
+        this.down = this.add.circle(700, 750, 20, 0xFF0000);
+		this.down.setInteractive();
+
+        this.start = this.add.circle(800, 750, 20, 0xFF0000);
+        this.start.setInteractive()
+        //.on('pointerdown', ()=>this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex))
+
+        this.delete = this.add.circle(900, 750, 20, 0xFF0000);
+        this.delete.setInteractive();
+
+        this.deleteAll = this.add.circle(1000, 750, 20, 0xFF0000);
+        this.deleteAll.setInteractive();
         
+        //add group to notes
+        this.noteGroup = this.add.group();
 
-
-        
-
-        //add sounds
-        //need to fix
-        this.soundC = this.sound.add("c1_sound")
-        this.soundG = this.sound.add("g5_sound")
-        this.soundA = this.sound.add("a6_sound")
-        this.soundD = this.sound.add("d2_sound")
-
-        /* this.goal = this.add.image(655,320,'star')
-        .setInteractive()
-        .on('pointerdown', ()=>this.goToEnd());
-        this.path.setScale(0.8); */
-        
-        //施工中
-        this.player = this.physics.add.sprite(340,320,'guy_right');
-        this.goals = this.physics.add.group();
-        this.goalsLeft = 0;
-        const goal1 = this.physics.add.sprite(655, 320, 'star');
-        this.goals.add(goal1);
-        this.goalsLeft++
-
-        this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
-
-
-
-        //施工中
+        this.userInput = []
+        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup);
         
         // Animations
 		this.anims.create({
@@ -99,40 +117,21 @@ export default class TestScene extends Phaser.Scene {
 			key: 'right',
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
-		
 
-        //add buttons
-        this.left = this.add.circle(400, 750, 20, 0xFF0000);
-		this.left.setInteractive();
+        this.player = this.physics.add.sprite(playerX, playerY, playerState);
+        this.player.setDepth(1)
+        this.goals = this.physics.add.group();
+        this.goalsLeft = 0;
 
-        this.right = this.add.circle(500, 750, 20, 0xFF0000);
-		this.right.setInteractive();
+        this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
 
-        this.up = this.add.circle(600, 750, 20, 0xFF0000);
-		this.up.setInteractive();
+        this.player.setCollideWorldBounds(true)
 
-        this.down = this.add.circle(700, 750, 20, 0xFF0000);
-		this.down.setInteractive();
 
-        this.start = this.add.circle(800, 750, 20, 0xFF0000);
-        this.start.setInteractive()
-        .on('pointerdown', ()=>this.movePlayer(this.player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput, this.inputIndex))
-
-        this.delete = this.add.circle(900, 750, 20, 0xFF0000);
-        this.delete.setInteractive();
-
-        this.deleteAll = this.add.circle(1000, 750, 20, 0xFF0000);
-        this.deleteAll.setInteractive();
-        
-        //add group to notes
-        this.noteGroup = this.add.group();
-
-        this.userInput = []
-        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup);
-        
         //add instruction
-        //this.instruction = this.add.image(650, 400, 'instruction').setInteractive()
-        //.on('pointerdown', ()=>this.instruction.setVisible(false));
+        this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
+        .on('pointerdown', ()=>this.instruction.setVisible(false));
+        this.instruction.setDepth(2)
         
         this.add.text(380, 742, 'Left');
 		this.add.text(478, 742, 'Right');
@@ -141,13 +140,6 @@ export default class TestScene extends Phaser.Scene {
         this.add.text(775, 742, 'Start');
         this.add.text(875, 742, 'Delete');
         this.add.text(975, 742, 'Delete\n All');
-
-
-        
-		//this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG, this.userInput);
-
-        
-        this.inputIndex = 0;
 	}
 
     onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
@@ -155,13 +147,13 @@ export default class TestScene extends Phaser.Scene {
         const goal = goalObj as Phaser.Physics.Arcade.Sprite;
     
         goal.destroy();
+    
         this.goalsLeft--;
     
         if (this.goalsLeft === 0) {
             this.scene.start('EndScene');
         }
-      }
-        
+    }
 
     private destroyLast(noteGroup: Phaser.GameObjects.Group) {
         const last = noteGroup.getChildren()[noteGroup.getChildren().length - 1] as Phaser.GameObjects.Text;
@@ -171,7 +163,7 @@ export default class TestScene extends Phaser.Scene {
         }
     }
 
-    editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group){
+    protected editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group){
         if (userInput.length <= 15){
             this.left.on('pointerdown', () => {
                 userInput.push("left")
@@ -227,35 +219,35 @@ export default class TestScene extends Phaser.Scene {
         } */
     }
     
-	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
-        soundG: Phaser.Sound.BaseSound, soundA: Phaser.Sound.BaseSound, soundD: Phaser.Sound.BaseSound, 
+	protected movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundLeft: Phaser.Sound.BaseSound,
+        soundRight: Phaser.Sound.BaseSound, soundUp: Phaser.Sound.BaseSound, soundDown: Phaser.Sound.BaseSound, 
         userInput:Array<string>, inputIndex: number) {
             if (inputIndex < userInput.length) {
                 if (userInput[inputIndex] === "left"){
                     player.x -= 105
                     player.play('left')
-                    soundA.play()
+                    soundLeft.play()
                     inputIndex++
                 }
                 else if(userInput[inputIndex] === "right"){
                     player.x += 105
                     player.play('right')
-                    soundD.play()
+                    soundRight.play()
                     inputIndex++
                 }
                 else if(userInput[inputIndex] === "up"){
                     player.y -= 105
                     player.play('up')
-                    soundC.play()
+                    soundUp.play()
                     inputIndex++
                 }
                 else{
                     player.y += 105
                     player.play('down')
-                    soundG.play()
+                    soundDown.play()
                     inputIndex++
                 }
-                setTimeout(() => this.movePlayer(player, soundC, soundG, soundA, soundD, userInput, inputIndex), 500);
+                setTimeout(() => this.movePlayer(player, soundLeft, soundRight, soundUp, soundDown, userInput, inputIndex), 700);
 
             }
             else{
@@ -264,10 +256,6 @@ export default class TestScene extends Phaser.Scene {
             }
         }
 
-    private handleArrive(){
-        this.scene.start('EndScene');
-    }
-
     goToTitle(){
         this.scene.start('TitleScene');
     }
@@ -275,13 +263,5 @@ export default class TestScene extends Phaser.Scene {
     goToEnd(){
         this.scene.start('EndScene');
     }
-
-    creatInstuction(){
-        this.instruction = this.add.image(650, 400, 'instruction').setInteractive();
-    }
-
-    removeInstruction(){
-        this.instruction.destroy();
-        this.instruction = null;
-    }
+    
 }

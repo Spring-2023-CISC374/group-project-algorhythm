@@ -1,61 +1,31 @@
 import Phaser from 'phaser'
-import LevelScene from './LevelScence'
+import BaseScene from './BaseScence'
 
-export default class TutorialScene extends LevelScene {
-    private soundC?: Phaser.Sound.BaseSound
-    private soundG?: Phaser.Sound.BaseSound
-    private soundA?: Phaser.Sound.BaseSound
-    private soundD?: Phaser.Sound.BaseSound
+export default class TutorialScene extends BaseScene {
 
     constructor() {
       super('TutorialScene');
     }
   
     create() {
-        super.create('mountain', 'Tutorial');
+        super.create('mountain', 'Tutorial', 340, 320, 'guy_right');
 
-        const player = this.physics.add.sprite(340,320,'guy_right');
-
-		player.setCollideWorldBounds(true)
-
-		//this.physics.world.setBounds(32, 20, 576, 240);
+        //this.player = this.physics.add.sprite(340, 320, 'guy_right');
+        const goal1 = this.physics.add.sprite(655, 320, 'star');
+        this.goals.add(goal1);
+        this.goalsLeft++
 
         //add sounds
         //need to fix
-        this.soundC = this.sound.add("c1_sound")
-        this.soundG = this.sound.add("g5_sound")
-        this.soundA = this.sound.add("a6_sound")
-        this.soundD = this.sound.add("d2_sound")
+        this.soundUp = this.sound.add("c1_sound")
+        this.soundDown = this.sound.add("g5_sound")
+        this.soundLeft = this.sound.add("a6_sound")
+        this.soundRight = this.sound.add("d2_sound")
 
-        this.goal = this.add.image(655,320,'star')
+        /* this.goal = this.add.image(655,320,'star')
         .setInteractive()
         .on('pointerdown', ()=>this.goToEnd());
-        this.path.setScale(0.8);
-
-        /* this.physics.add.collider(this.player, this.goal)
-		this.physics.add.overlap(this.player, this.goal, this.handleArrive, undefined, this)  */
-
-		// Animations
-		this.anims.create({
-			key: 'up',
-			frames: this.anims.generateFrameNumbers('guy_up', {start:0, end:3}), frameRate: 13, repeat: -1
-		});
-		this.anims.create({
-			key: 'down',
-			frames: this.anims.generateFrameNumbers('guy_down', {start:0, end:3}), frameRate: 13, repeat: -1
-		});
-		this.anims.create({
-			key: 'left',
-			frames: this.anims.generateFrameNumbers('guy_left', {start:0, end:3}), frameRate: 13, repeat: -1
-		});
-		this.anims.create({
-			key: 'right',
-			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
-		});
-		
-		this.movePlayer(player, this.soundA, this.soundC, this.soundD, this.soundG);
-
-        
+        this.path.setScale(0.8); */
 
         //add trees 
         this.add.image(660, 200, 'tree1')
@@ -70,59 +40,10 @@ export default class TutorialScene extends LevelScene {
         this.add.image(680, 450, 'bush2')
 
         //add instruction
-        this.instruction = this.add.image(650, 400, 'instructions').setInteractive()
-        .on('pointerdown', ()=>this.instruction.setVisible(false));
+        this.instruction.setVisible(true)
+
         
-	}
-    
-	movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundC: Phaser.Sound.BaseSound,
-        soundG: Phaser.Sound.BaseSound, soundA: Phaser.Sound.BaseSound, soundD: Phaser.Sound.BaseSound) {
-		const Left = this.add.circle(400, 750, 20, 0xFF0000);
-		Left.setInteractive();
-		Left.on('pointerup', function() {
-			player.x -= 105
-			player.play('left')
-            soundA.play()
-		});
-
-		const Right = this.add.circle(500, 750, 20, 0xFF0000);
-		Right.setInteractive();
-		Right.on('pointerup', function() {
-			player.x += 105
-			player.play('right')
-            soundD.play()
-		});
-
-		const Up = this.add.circle(600, 750, 20, 0xFF0000);
-		Up.setInteractive();
-		Up.on('pointerup', function() {
-			player.y -= 105
-			player.play('up')
-            soundC.play()
-		});
-
-		const Down = this.add.circle(700, 750, 20, 0xFF0000);
-		Down.setInteractive();
-		Down.on('pointerup', function() {
-			player.y += 105
-			player.play('down')
-            soundG.play()
-		});
-
-		this.add.text(380, 742, 'Left');
-		this.add.text(478, 742, 'Right');
-		this.add.text(590, 742, 'Up');
-		this.add.text(680, 742, 'Down');
-
-		
+		this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
 	}
 
-    createInstuction(){
-        this.instruction = this.add.image(650, 400, 'instructions').setInteractive();
-    }
-
-    removeInstruction(){
-        this.instruction.destroy();
-        this.instruction = null;
-    }
 }

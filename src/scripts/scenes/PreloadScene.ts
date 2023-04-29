@@ -10,8 +10,6 @@ export default class PreloadScene extends Phaser.Scene {
       //test images
         this.load.image("ada", "assets/images/ada.png");
 
-        this.load.image('dude', 'assets/sprites/placerDude.jpg');
-
       // background
         this.load.image('city', 'assets/images/city.png');
         this.load.image('mountain', 'assets/images/mountain.png');        
@@ -64,5 +62,9 @@ export default class PreloadScene extends Phaser.Scene {
 
     create() {
       this.scene.start('TitleScene');
-	}
+      
+      //Shortcut
+      //this.scene.start('Level1');
+      //this.scene.start('TestScene');
+    }
 }

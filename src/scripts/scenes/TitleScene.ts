@@ -11,12 +11,12 @@ export default class TitleScene extends Phaser.Scene{
     
     create(){
         this.add.image(400, 300, 'city')
-        this.add.text(70, 100, "Algorhythm", { color: "#222222", font: "120px Times New Roman"})
+        this.add.text(70, 100, "Algorhythm", { color: "#FFFFFF", font: "120px Times New Roman"})
 
         this.button1 = this.add.rectangle(600, 500, 200, 100, 0xdadaaa)
-        /* .setInteractive()
+        .setInteractive()
         .on('pointerdown', ()=>this.goToLevel());
-        this.button1.setScale(0.8); */
+        this.button1.setScale(0.8); 
 
         this.button2 = this.add.rectangle(200, 500, 200, 100, 0xaadada)
         .setInteractive()
@@ -38,6 +38,9 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     goToLevel(){
-        this.scene.start('LevelScene');
+        this.scene.start('Level1');
+        //when map is ready
+        //this.scene.start('Level1');
+        this.bgm?.stop()
     }
 }
