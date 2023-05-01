@@ -125,6 +125,8 @@ export default class BaseScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
 
+        this.player.setCollideWorldBounds(true)
+
 
         //add instruction
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)

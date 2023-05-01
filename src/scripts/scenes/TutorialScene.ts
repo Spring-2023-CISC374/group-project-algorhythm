@@ -33,7 +33,7 @@ export default class TutorialScene extends BaseScene {
         this.add.image(800, 255, 'tree3')
         this.add.image(550, 255, 'bush1')
         this.add.image(450, 200, 'tree3')
-        this.add.image(480, 350, 'rock2')
+        this.add.image(480, 350, 'rock1')
         this.add.image(430, 420, 'stump2')
         this.add.image(630, 420, 'bush2')
         this.add.image(660, 520, 'bush2')
