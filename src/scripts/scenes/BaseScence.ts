@@ -236,13 +236,13 @@ export default class BaseScene extends Phaser.Scene {
                     inputIndex++
                 }
                 else if(userInput[inputIndex] === "up"){
-                    player.y -= 105
+                    player.y -= 100
                     player.play('up')
                     soundUp.play()
                     inputIndex++
                 }
                 else{
-                    player.y += 105
+                    player.y += 100
                     player.play('down')
                     soundDown.play()
                     inputIndex++
