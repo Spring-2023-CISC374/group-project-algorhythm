@@ -57,7 +57,7 @@ export default class BaseScene extends Phaser.Scene {
         this.question.setScale(0.8);
 
         //add staff paper images
-        this.add.image(675, 625, 'staffpaper')
+        this.add.image(655, 625, 'paper')
 
         //add level text
         this.add.text(16, 16, levelName, {
@@ -142,8 +142,8 @@ export default class BaseScene extends Phaser.Scene {
         this.add.text(975, 742, 'Delete\n All');
 	}
 
-    onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
-        const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+    onCollision(_playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
+        //const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
         const goal = goalObj as Phaser.Physics.Arcade.Sprite;
     
         goal.destroy();
@@ -236,13 +236,13 @@ export default class BaseScene extends Phaser.Scene {
                     inputIndex++
                 }
                 else if(userInput[inputIndex] === "up"){
-                    player.y -= 100
+                    player.y -= 105
                     player.play('up')
                     soundUp.play()
                     inputIndex++
                 }
                 else{
-                    player.y += 100
+                    player.y += 105
                     player.play('down')
                     soundDown.play()
                     inputIndex++
