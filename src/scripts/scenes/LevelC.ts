@@ -1,13 +1,13 @@
 import BaseScene from './BaseScence'
 
-export default class Level1 extends BaseScene {
+export default class LevelC extends BaseScene {
     constructor() {
-      super('Level1');
+      super('LevelC');
     }
     
     create() {
       console.log('level 1');
-      super.create('mountain', 'Level 1', 444, 20, 'guy_down');
+      super.create('mountain', 'Level C', 444, 20, 'guy_down');
       this.add.image(650, 32, 'map');
 
       //add sounds
