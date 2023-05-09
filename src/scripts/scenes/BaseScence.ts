@@ -125,6 +125,8 @@ export default class BaseScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
 
+        this.physics.world.setBounds(300, 20, 700, 520);
+
         this.player.setCollideWorldBounds(true)
 
 
