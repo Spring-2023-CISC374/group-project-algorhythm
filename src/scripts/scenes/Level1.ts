@@ -1,4 +1,3 @@
-import Phaser from 'phaser'
 import BaseScene from './BaseScence'
 
 export default class Level1 extends BaseScene {
@@ -17,6 +16,7 @@ export default class Level1 extends BaseScene {
       this.soundLeft = this.sound.add("c1_sound")
       this.soundRight = this.sound.add("e3_sound")
 
+
       const goal1 = this.physics.add.sprite(865, 320, 'star');
       const goal2 = this.physics.add.sprite(550, 30, 'star');
       const goal3 = this.physics.add.sprite(445, 130, 'star');
@@ -25,10 +25,10 @@ export default class Level1 extends BaseScene {
       this.goals.add(goal2);
       this.goals.add(goal3);
       this.goals.add(goal4);
-      this.goalsLeft = 4
+      this.goalsLeft = 4 
 
   
-      //add trees 
+     // add trees 
       this.add.image(560, 420, 'tree1').setScale(1.7)
       this.add.image(360, 395, 'tree2')
       this.add.image(880, 125, 'tree3')
@@ -39,7 +39,8 @@ export default class Level1 extends BaseScene {
       this.add.image(950, 400, 'stump2')
       this.add.image(950, 320, 'bush2')
       this.add.image(960, 520, 'bush2')
-      this.add.image(980, 450, 'bush2') 
+      this.add.image(980, 450, 'bush2')  
+
 
       //add instruction
       this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)

@@ -7,9 +7,6 @@ export default class PreloadScene extends Phaser.Scene {
     }
   
     preload() {
-      //test images
-        this.load.image("ada", "assets/images/ada.png");
-
       // background
         this.load.image('city', 'assets/images/city.png');
         this.load.image('mountain', 'assets/images/mountain.png');        
@@ -20,9 +17,10 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.image('mark', 'assets/images/mark.jpg');
         this.load.image('button', 'assets/images/tmpButton.jpg');
         this.load.image('staffpaper', 'assets/images/staffpaper.png');
-        this.load.image('extrapaper', 'assets/images/extrapaper.jpg');
+        this.load.image('paper','assets/images/paper.png');
         this.load.image('note', 'assets/images/note.png');
         this.load.image('map', 'assets/images/map.png');
+        
       
       // sprite
         this.load.spritesheet('guy_up', "assets/sprites/sprite_up.png", {frameWidth: 64, frameHeight: 51});
