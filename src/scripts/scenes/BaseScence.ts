@@ -26,6 +26,8 @@ export default class BaseScene extends Phaser.Scene {
     protected soundUp!: Phaser.Sound.BaseSound
     protected soundDown!: Phaser.Sound.BaseSound
 
+    protected levelSound!: Phaser.Sound.BaseSound
+
 
     constructor(KeyName: string) {
       super(KeyName);
@@ -35,15 +37,6 @@ export default class BaseScene extends Phaser.Scene {
         this.add.image(400, 300, imageName)
 
         this.inputIndex = 0;
-
-        //add buttons images
-        this.add.image(400, 755, 'button')
-        this.add.image(500, 755, 'button')
-        this.add.image(600, 755, 'button')
-		this.add.image(700, 755, 'button')
-        this.add.image(800, 755, 'button')
-        this.add.image(900, 755, 'button')
-        this.add.image(1000, 755, 'button')
         
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
@@ -57,7 +50,7 @@ export default class BaseScene extends Phaser.Scene {
         this.question.setScale(0.8);
 
         //add staff paper images
-        this.add.image(675, 625, 'staffpaper')
+        this.add.image(630, 655, 'paper')
 
         //add level text
         this.add.text(16, 16, levelName, {
@@ -65,33 +58,32 @@ export default class BaseScene extends Phaser.Scene {
 			color: '#222222'
 		})
 
-        //add note
-        this.add.image(85, 320, 'note')
+        //add note (level specific now)
+        //this.add.image(85, 320, 'note')
 
         //add map
         this.add.image(650, 320, 'map')
 
         //add buttons
-        this.left = this.add.circle(400, 750, 20, 0xFF0000);
+        this.left = this.add.image(400, 757, "left");
 		this.left.setInteractive();
 
-        this.right = this.add.circle(500, 750, 20, 0xFF0000);
+        this.right = this.add.image(500, 757, "right");
 		this.right.setInteractive();
 
-        this.up = this.add.circle(600, 750, 20, 0xFF0000);
+        this.up = this.add.image(600, 757, "up");
 		this.up.setInteractive();
 
-        this.down = this.add.circle(700, 750, 20, 0xFF0000);
+        this.down = this.add.image(700, 757, "down");
 		this.down.setInteractive();
 
-        this.start = this.add.circle(800, 750, 20, 0xFF0000);
+        this.start = this.add.image(1000, 655, "start");
         this.start.setInteractive()
-        //.on('pointerdown', ()=>this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex))
 
-        this.delete = this.add.circle(900, 750, 20, 0xFF0000);
+        this.delete = this.add.image(855, 750, "delete");
         this.delete.setInteractive();
 
-        this.deleteAll = this.add.circle(1000, 750, 20, 0xFF0000);
+        this.deleteAll = this.add.image(970, 750, "deleteAll");
         this.deleteAll.setInteractive();
         
         //add group to notes
@@ -135,17 +127,10 @@ export default class BaseScene extends Phaser.Scene {
         .on('pointerdown', ()=>this.instruction.setVisible(false));
         this.instruction.setDepth(2)
         
-        this.add.text(380, 742, 'Left');
-		this.add.text(478, 742, 'Right');
-		this.add.text(590, 742, 'Up');
-		this.add.text(680, 742, 'Down');
-        this.add.text(775, 742, 'Start');
-        this.add.text(875, 742, 'Delete');
-        this.add.text(975, 742, 'Delete\n All');
-	}
+    }
 
-    onCollision(playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
-        const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+    onCollision(_playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
+        //const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
         const goal = goalObj as Phaser.Physics.Arcade.Sprite;
     
         goal.destroy();
@@ -238,13 +223,13 @@ export default class BaseScene extends Phaser.Scene {
                     inputIndex++
                 }
                 else if(userInput[inputIndex] === "up"){
-                    player.y -= 100
+                    player.y -= 105
                     player.play('up')
                     soundUp.play()
                     inputIndex++
                 }
                 else{
-                    player.y += 100
+                    player.y += 105
                     player.play('down')
                     soundDown.play()
                     inputIndex++
