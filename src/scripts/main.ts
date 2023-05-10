@@ -11,6 +11,7 @@ import LevelA from './scenes/LevelA'
 import LevelB from './scenes/LevelB'
 import LevelC from './scenes/LevelC'
 import LevelMenu from './scenes/LevelMenu'
+import LevelC from './scenes/LevelC'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -25,7 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
 		},
 	},
 	scene: [PreloadScene, BaseScene, TitleScene, TutorialScene, TestScene, EndScene, 
-		Level1, LevelA, LevelB, LevelMenu],
+		Level1, LevelA, LevelB, LevelC, LevelMenu],
 	
 }
 

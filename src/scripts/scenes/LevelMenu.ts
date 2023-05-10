@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 export default class LevelMenu extends Phaser.Scene{
     private button1: any;
     private button2: any;
+    private button3: any;
 
     constructor(){
         super({key: 'LevelMenu'});
@@ -19,10 +20,16 @@ export default class LevelMenu extends Phaser.Scene{
         .on('pointerdown', ()=>this.scene.start('LevelA'));
         this.button2.setScale(0.8);
 
+        this.button3 = this.add.rectangle(1000, 500, 200, 100, 0xdadadaa)
+        .setInteractive()
+        .on('pointerdown', ()=>this.scene.start('LevelC'));
+        this.button3.setScale(0.8); 
+
 
         //add texts on buttons
         this.add.text(170, 485, "LevelA", { color: "#222222", font: "20px Times New Roman"})
         this.add.text(575, 485, "LevelB", { color: "#222222", font: "20px Times New Roman"})
+        this.add.text(975, 485, "LevelC", { color: "#222222", font: "20px Times New Roman"})
         
     }
 }
