@@ -11,6 +11,14 @@ export default class Level1 extends BaseScene {
       super.create('mountain', 'Level 1', 444, 20, 'guy_down');
       this.add.image(650, 32, 'map');
 
+      this.levelSound = this.sound.add("g5_sound");
+
+
+      //COPY THIS 
+      const song_instructions = this.add.image(85, 320, 'note');
+      song_instructions.setInteractive();
+      song_instructions.on('pointerdown', () => this.levelSound.play())
+
       //add sounds
       this.soundUp = this.sound.add("g5_sound")
       this.soundDown = this.sound.add("d2_sound")

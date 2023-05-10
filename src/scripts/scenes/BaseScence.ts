@@ -26,6 +26,8 @@ export default class BaseScene extends Phaser.Scene {
     protected soundUp!: Phaser.Sound.BaseSound
     protected soundDown!: Phaser.Sound.BaseSound
 
+    protected levelSound!: Phaser.Sound.BaseSound
+
 
     constructor(KeyName: string) {
       super(KeyName);
@@ -65,8 +67,8 @@ export default class BaseScene extends Phaser.Scene {
 			color: '#222222'
 		})
 
-        //add note
-        this.add.image(85, 320, 'note')
+        //add note (level specific now)
+        //this.add.image(85, 320, 'note')
 
         //add map
         this.add.image(650, 320, 'map')

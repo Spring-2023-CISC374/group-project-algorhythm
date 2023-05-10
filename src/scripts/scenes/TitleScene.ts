@@ -38,7 +38,7 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     goToLevel(){
-        this.scene.start('Level1');
+        this.scene.start('LevelA');
         console.log("leave title screen");
         //when map is ready
         //this.scene.start('Level1');
