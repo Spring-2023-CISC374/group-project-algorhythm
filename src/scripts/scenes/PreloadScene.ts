@@ -65,6 +65,7 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.audio("c8_sound", "assets/sounds/c2.mp3");
         this.load.audio("levelAPreview", "assets/sounds/levelApreview.mp3");
         this.load.audio("levelBPreview", "assets/sounds/levelBpreview.mp3");
+        this.load.audio("tutorialPreview", "assets/sounds/tutorialPreview.mp3");
     }
 
     create() {
