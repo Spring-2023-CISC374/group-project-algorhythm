@@ -16,14 +16,18 @@ export default class PreloadScene extends Phaser.Scene {
 
 
       // layout
-        this.load.image('arrow', 'assets/images/arrow.jpg');
-        this.load.image('mark', 'assets/images/mark.jpg');
-        this.load.image('button', 'assets/images/tmpButton.jpg');
-        this.load.image('staffpaper', 'assets/images/staffpaper.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
+        this.load.image('mark', 'assets/images/mark.png');
+        this.load.image('right', 'assets/images/right.png');
+        this.load.image('left', 'assets/images/left.png');
+        this.load.image('up', 'assets/images/up.png');
+        this.load.image('down', 'assets/images/down.png');
+        this.load.image('delete', 'assets/images/delete.png');
+        this.load.image('deleteAll', 'assets/images/deleteAll.png');
         this.load.image('paper','assets/images/paper.png');
         this.load.image('note', 'assets/images/note.png');
         this.load.image('map', 'assets/images/map.png');
-        
+        this.load.image('start', 'assets/images/start.png');
       
       // sprite
         this.load.spritesheet('guy_up', "assets/sprites/sprite_up.png", {frameWidth: 64, frameHeight: 51});
@@ -64,10 +68,10 @@ export default class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-      this.scene.start('TitleScene');
+      //this.scene.start('TitleScene');
       
       //Shortcut
       //this.scene.start('Level1');
-      //this.scene.start('TestScene');
+      this.scene.start('TutorialScene');
     }
 }
