@@ -16,16 +16,17 @@ export default class TutorialScene extends BaseScene {
 
         //add sounds
         //need to fix
-        this.soundUp = this.sound.add("c1_sound")
-        this.soundDown = this.sound.add("g5_sound")
-        this.soundLeft = this.sound.add("a6_sound")
-        this.soundRight = this.sound.add("d2_sound")
+        this.soundUp = this.sound.add("a6_sound")
+        this.soundDown = this.sound.add("c1_sound")
+        this.soundLeft = this.sound.add("d2_sound")
+        this.soundRight = this.sound.add("g5_sound")
+        
 
         //note images
-        this.noteLeft = "1"
-        this.noteRight = "2"
-        this.noteUp = "3"
-        this.noteDown = "4"
+        this.noteLeft = "2"
+        this.noteRight = "5"
+        this.noteUp = "6"
+        this.noteDown = "1"
 
         /* this.goal = this.add.image(655,320,'star')
         .setInteractive()

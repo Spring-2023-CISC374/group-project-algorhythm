@@ -94,8 +94,8 @@ export default class BaseScene extends Phaser.Scene {
         this.noteGroup = this.add.group();
 
         this.userInput = []
-        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
-            this.noteUp, this.noteDown);
+        //this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
+            //this.noteUp, this.noteDown);
         
         // Animations
 		this.anims.create({
