@@ -10,12 +10,12 @@ export default class LevelC extends BaseScene {
       super.create('mountain', 'Level C', 444, 20, 'guy_down');
       this.add.image(650, 32, 'map');
 
-      //add sounds
+      /* //add sounds
       this.soundUp = this.sound.add("e5_sound")
       this.soundDown = this.sound.add("c5_sound")
       this.soundLeft = this.sound.add("g4_sound")
       this.soundRight = this.sound.add("d5_sound")
-
+ */
       const goal1 = this.physics.add.sprite(650, 220, 'star');
       const goal2 = this.physics.add.sprite(550, 130, 'star');
       const goal3 = this.physics.add.sprite(345, 30, 'star');

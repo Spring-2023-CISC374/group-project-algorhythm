@@ -29,7 +29,7 @@ export default class TutorialScene extends BaseScene {
         this.noteDown = "1"
 
         this.levelSound = this.sound.add("tutorialPreview"); 
-        const song_instructions = this.add.image(85, 320, 'note');
+        const song_instructions = this.add.image(105, 320, 'note');
         song_instructions.setInteractive();
         song_instructions.on('pointerdown', () => this.levelSound.play())
 
@@ -53,8 +53,16 @@ export default class TutorialScene extends BaseScene {
         //add instruction
         this.instruction.setVisible(true)
 
+        this.path.removeAllListeners();
+        this.path.on('pointerdown', ()=>this.scene.start('TitleScene'));
+
         
-        this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+        this.start.on('pointerdown', () => {
+          this.player.x = this.initialPlayerX;
+          this.player.y = this.initialPlayerY;
+          setTimeout(() => this.movePlayer(this.player, this.soundLeft, this.soundRight, 
+            this.soundUp, this.soundDown, this.userInput, this.inputIndex), 700);
+      });
         this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
           this.noteUp, this.noteDown);
 	}

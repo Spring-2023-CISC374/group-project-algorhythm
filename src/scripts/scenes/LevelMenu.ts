@@ -4,12 +4,20 @@ export default class LevelMenu extends Phaser.Scene{
     private button1: any;
     private button2: any;
     private button3: any;
+    private path?: any
 
     constructor(){
         super({key: 'LevelMenu'});
     }
     
     create(){
+        this.add.image(500, 450, 'mountain')
+
+        this.path = this.add.image(1220, 50, 'arrow')
+        .setInteractive()
+        .on('pointerdown', ()=>this.scene.start('TitleScene'));
+        this.path.setScale(0.8);
+
         this.button1 = this.add.rectangle(600, 500, 200, 100, 0xdadaaa)
         .setInteractive()
         .on('pointerdown', ()=>this.scene.start('LevelB'));

@@ -7,16 +7,22 @@ export default class LevelA extends BaseScene{
 
     create() {
       console.log('level a');
-      super.create('mountain', 'Level A', 444, 120, 'guy_down');
+      super.create('mountain', 'Mary Had A\nLittle Lamb', 444, 120, 'guy_down');
       this.add.image(650, 32, 'map');
         //add sounds
       this.soundUp = this.sound.add("c1_sound")
       this.soundDown = this.sound.add("e3_sound")
       this.soundLeft = this.sound.add("g5_sound")
       this.soundRight = this.sound.add("d2_sound")
+
+      //note images
+      this.noteLeft = "5"
+      this.noteRight = "2"
+      this.noteUp = "1"
+      this.noteDown = "3"
       
       this.levelSound = this.sound.add("levelAPreview"); 
-      const song_instructions = this.add.image(85, 320, 'note');
+      const song_instructions = this.add.image(105, 320, 'note');
       song_instructions.setInteractive();
       song_instructions.on('pointerdown', () => this.levelSound.play())
 
@@ -53,7 +59,9 @@ export default class LevelA extends BaseScene{
       this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
       .on('pointerdown', ()=>this.instruction.setVisible(false));
         
-       this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
-  }
+      this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+      this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
+        this.noteUp, this.noteDown);
+      }
   
 }
