@@ -21,6 +21,12 @@ export default class TutorialScene extends BaseScene {
         this.soundLeft = this.sound.add("a6_sound")
         this.soundRight = this.sound.add("d2_sound")
 
+        //note images
+        this.noteLeft = "1"
+        this.noteRight = "2"
+        this.noteUp = "3"
+        this.noteDown = "4"
+
         /* this.goal = this.add.image(655,320,'star')
         .setInteractive()
         .on('pointerdown', ()=>this.goToEnd());
@@ -42,7 +48,9 @@ export default class TutorialScene extends BaseScene {
         this.instruction.setVisible(true)
 
         
-		this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+        this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
+          this.noteUp, this.noteDown);
 	}
 
 }
