@@ -21,6 +21,11 @@ export default class TutorialScene extends BaseScene {
         this.soundLeft = this.sound.add("a6_sound")
         this.soundRight = this.sound.add("d2_sound")
 
+        this.levelSound = this.sound.add("tutorialPreview"); 
+        const song_instructions = this.add.image(85, 320, 'note');
+        song_instructions.setInteractive();
+        song_instructions.on('pointerdown', () => this.levelSound.play())
+
         /* this.goal = this.add.image(655,320,'star')
         .setInteractive()
         .on('pointerdown', ()=>this.goToEnd());
