@@ -16,10 +16,17 @@ export default class TutorialScene extends BaseScene {
 
         //add sounds
         //need to fix
-        this.soundUp = this.sound.add("c1_sound")
-        this.soundDown = this.sound.add("g5_sound")
-        this.soundLeft = this.sound.add("a6_sound")
-        this.soundRight = this.sound.add("d2_sound")
+        this.soundUp = this.sound.add("a6_sound")
+        this.soundDown = this.sound.add("c1_sound")
+        this.soundLeft = this.sound.add("d2_sound")
+        this.soundRight = this.sound.add("g5_sound")
+        
+
+        //note images
+        this.noteLeft = "2"
+        this.noteRight = "5"
+        this.noteUp = "6"
+        this.noteDown = "1"
 
         this.levelSound = this.sound.add("tutorialPreview"); 
         const song_instructions = this.add.image(85, 320, 'note');
@@ -47,7 +54,9 @@ export default class TutorialScene extends BaseScene {
         this.instruction.setVisible(true)
 
         
-		this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+        this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
+        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
+          this.noteUp, this.noteDown);
 	}
 
 }
