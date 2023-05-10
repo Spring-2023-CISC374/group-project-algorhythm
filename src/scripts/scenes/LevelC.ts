@@ -6,7 +6,7 @@ export default class LevelC extends BaseScene {
     }
     
     create() {
-      console.log('level 1');
+      console.log('level c');
       super.create('mountain', 'Level C', 444, 20, 'guy_down');
       this.add.image(650, 32, 'map');
 
