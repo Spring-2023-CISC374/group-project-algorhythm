@@ -13,8 +13,14 @@ export default class LevelC extends BaseScene {
      //add sounds
       this.soundUp = this.sound.add("e3_sound")
       this.soundDown = this.sound.add("c1_sound")
-      this.soundLeft = this.sound.add("g5_sound")
+      this.soundLeft = this.sound.add("gLow_sound")
       this.soundRight = this.sound.add("d2_sound")
+
+      //add notes
+      this.noteLeft = "5"
+      this.noteRight = "9"
+      this.noteUp = "10"
+      this.noteDown = "8"
 
       this.levelSound = this.sound.add("levelCPreview"); 
       const song_instructions = this.add.image(105, 320, 'note');
