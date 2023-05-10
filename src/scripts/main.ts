@@ -9,8 +9,8 @@ import EndScene from './scenes/EndScene'
 import Level1 from './scenes/Level1'
 import LevelA from './scenes/LevelA'
 import LevelB from './scenes/LevelB'
-import LevelMenu from './scenes/LevelMenu'
 import LevelC from './scenes/LevelC'
+import LevelMenu from './scenes/LevelMenu'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
