@@ -15,6 +15,7 @@ export default class BaseScene extends Phaser.Scene {
     protected start?:any
     protected delete?: any
     protected deleteAll?: any
+    protected reset?: any
     protected inputIndex!: number
     protected noteX = 375
     protected noteY = 655
@@ -24,6 +25,8 @@ export default class BaseScene extends Phaser.Scene {
     protected noteDown!: any
     protected noteGroup!: Phaser.GameObjects.Group
     protected message?: any
+    protected initialPlayerX!: number;
+    protected initialPlayerY!: number;
 
     protected soundLeft!: Phaser.Sound.BaseSound
     protected soundRight!: Phaser.Sound.BaseSound
@@ -40,12 +43,15 @@ export default class BaseScene extends Phaser.Scene {
     create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string) {
         this.add.image(400, 300, imageName)
 
+        this.initialPlayerX = playerX;
+        this.initialPlayerY = playerY;
+        
         this.inputIndex = 0;
         
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
-        .on('pointerdown', ()=>this.goToTitle());
+        .on('pointerdown', ()=>this.scene.start('LevelMenu'));
         this.path.setScale(0.8);
 
         this.question = this.add.image(1100, 50, 'mark')
@@ -89,6 +95,10 @@ export default class BaseScene extends Phaser.Scene {
 
         this.deleteAll = this.add.image(970, 750, "deleteAll");
         this.deleteAll.setInteractive();
+
+        this.reset = this.add.image(1070, 750, "reset");
+        this.reset.setInteractive();
+        
         
         //add group to notes
         this.noteGroup = this.add.group();
@@ -125,7 +135,6 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.world.setBounds(300, 20, 700, 520);
 
         this.player.setCollideWorldBounds(true)
-
 
         //add instruction
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
@@ -205,6 +214,13 @@ export default class BaseScene extends Phaser.Scene {
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
+            this.reset.on('pointerdown', () => {
+                this.player.x = this.initialPlayerX;
+                this.player.y = this.initialPlayerY; 
+                userInput.length = 0;
+                noteGroup.clear(true, true);
+                noteX = 375
+            });
         /* else{
             this.message = this.add.text(500, 250, 'Too many notes!', 
             { font: '20px Monospace', 
@@ -243,11 +259,10 @@ export default class BaseScene extends Phaser.Scene {
                     inputIndex++
                 }
                 setTimeout(() => this.movePlayer(player, soundLeft, soundRight, soundUp, soundDown, userInput, inputIndex), 700);
-
             }
             else{
-                userInput.length = 0;
-                inputIndex = 0;
+                /* userInput.length = 0;
+                inputIndex = 0; */
             }
         }
 

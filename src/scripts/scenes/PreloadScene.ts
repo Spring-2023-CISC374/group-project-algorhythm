@@ -28,6 +28,7 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.image('note', 'assets/images/note.png');
         this.load.image('map', 'assets/images/map.png');
         this.load.image('start', 'assets/images/start.png');
+        this.load.image('reset', 'assets/images/reset.png');
       
       // sprite
         this.load.spritesheet('guy_up', "assets/sprites/sprite_up.png", {frameWidth: 64, frameHeight: 51});
@@ -83,10 +84,10 @@ export default class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-      //this.scene.start('TitleScene');
+      this.scene.start('TitleScene');
       
       //Shortcut
-      //this.scene.start('Level1');
-      this.scene.start('TutorialScene');
+      //this.scene.start('LevelC');
+      //this.scene.start('TutorialScene');
     }
 }
