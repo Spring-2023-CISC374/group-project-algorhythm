@@ -7,7 +7,7 @@ export default class EndScene extends Phaser.Scene {
   
     create() {
       // code from Spanish Shopping Expedition
-      this.add.image(600, 400, "end")
+      this.add.image(700, 400, "endscreen")
       .setInteractive()
       .on('pointerdown', ()=>this.goToTitle());
   
