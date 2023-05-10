@@ -10,8 +10,8 @@ export default class TitleScene extends Phaser.Scene{
     }
     
     create(){
-        this.add.image(400, 300, 'city')
-        this.add.text(70, 100, "Algorhythm", { color: "#FFFFFF", font: "120px Times New Roman"})
+        this.add.image(500, 450, 'title')
+        //this.add.text(200, 100, "Algorhythm", { color: "#FFFFFF", font: "120px Times New Roman"})
 
         this.button1 = this.add.rectangle(600, 500, 200, 100, 0xdadaaa)
         .setInteractive()
