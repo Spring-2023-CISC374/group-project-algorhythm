@@ -13,12 +13,12 @@ export default class TitleScene extends Phaser.Scene{
         this.add.image(500, 450, 'title')
         //this.add.text(200, 100, "Algorhythm", { color: "#FFFFFF", font: "120px Times New Roman"})
 
-        this.button1 = this.add.rectangle(600, 500, 200, 100, 0xdadaaa)
+        this.button1 = this.add.rectangle(850, 500, 200, 100, 0xdadaaa)
         .setInteractive()
         .on('pointerdown', ()=>this.goToLevel());
         this.button1.setScale(0.8); 
 
-        this.button2 = this.add.rectangle(200, 500, 200, 100, 0xaadada)
+        this.button2 = this.add.rectangle(350, 500, 200, 100, 0xaadada)
         .setInteractive()
         .on('pointerdown', ()=>this.goToTutorial());
         this.button2.setScale(0.8);
@@ -28,8 +28,10 @@ export default class TitleScene extends Phaser.Scene{
 		this.bgm.play()
 
         //add texts on buttons
-        this.add.text(575, 485, "Level", { color: "#222222", font: "20px Times New Roman"})
-        this.add.text(170, 485, "Tutorial", { color: "#222222", font: "20px Times New Roman"})
+        this.add.text(825, 485, "Level", { color: "#222222", font: "20px Times New Roman"})
+        this.add.text(315, 485, "Tutorial", { color: "#222222", font: "20px Times New Roman"})
+    
+        this.add.text(15, 770, "*To fully enjoy the game, we recommend to turn up the volume.", { color: "#FFFFFF", font: "20px Times New Roman"})
     }
 
     goToTutorial(){

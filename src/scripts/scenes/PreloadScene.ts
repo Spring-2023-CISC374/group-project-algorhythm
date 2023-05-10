@@ -28,13 +28,13 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.image('note', 'assets/images/note.png');
         this.load.image('map', 'assets/images/map.png');
         this.load.image('start', 'assets/images/start.png');
+        this.load.image('reset', 'assets/images/reset.png');
       
       // sprite
         this.load.spritesheet('guy_up', "assets/sprites/sprite_up.png", {frameWidth: 64, frameHeight: 51});
         this.load.spritesheet('guy_down', "assets/sprites/sprite_down.png", {frameWidth: 64, frameHeight: 51});
         this.load.spritesheet('guy_left', "assets/sprites/sprite_left.png", {frameWidth: 64, frameHeight: 51});
         this.load.spritesheet('guy_right', "assets/sprites/sprite_right.png", {frameWidth: 64, frameHeight: 51});
-
 
       //images 
         this.load.image('bush1','assets/images/bush1.png');
@@ -49,6 +49,21 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.image('stump2','assets/images/stump2.png');
         this.load.image('instruction','assets/images/instructions.png');
         this.load.image('star','assets/images/star.png');
+
+      //note images 
+        this.load.image('1','assets/notes/1.png');
+        this.load.image('2','assets/notes/2.png');
+        this.load.image('3','assets/notes/3.png');
+        this.load.image('4','assets/notes/4.png');
+        this.load.image('5','assets/notes/5.png');
+        this.load.image('6','assets/notes/6.png');
+        this.load.image('7','assets/notes/7.png');
+        this.load.image('8','assets/notes/8.png');
+        this.load.image('9','assets/notes/9.png');
+        this.load.image('10','assets/notes/10.png');
+        this.load.image('11','assets/notes/11.png');
+        this.load.image('12','assets/notes/12.png');
+        this.load.image('13','assets/notes/13.png');
 
       //music
         this.load.audio('genericMusic', "assets/musics/genericmusic.mp3");
@@ -69,10 +84,10 @@ export default class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-      //this.scene.start('TitleScene');
+      this.scene.start('TitleScene');
       
       //Shortcut
-      //this.scene.start('Level1');
-      this.scene.start('TutorialScene');
+      //this.scene.start('LevelC');
+      //this.scene.start('TutorialScene');
     }
 }

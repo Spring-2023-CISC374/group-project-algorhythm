@@ -4,7 +4,7 @@ import TitleScene from './scenes/TitleScene'
 import PreloadScene from './scenes/PreloadScene'
 import BaseScene from './scenes/BaseScence'
 import TutorialScene from './scenes/TutorialScene'
-import TestScene from './scenes/TestScene'
+//import TestScene from './scenes/TestScene'
 import EndScene from './scenes/EndScene'
 import Level1 from './scenes/Level1'
 import LevelA from './scenes/LevelA'
@@ -24,7 +24,7 @@ const config: Phaser.Types.Core.GameConfig = {
 			debug: false
 		},
 	},
-	scene: [PreloadScene, BaseScene, TitleScene, TutorialScene, TestScene, EndScene, 
+	scene: [PreloadScene, BaseScene, TitleScene, TutorialScene, EndScene, 
 		Level1, LevelA, LevelB, LevelC, LevelMenu],
 	
 }

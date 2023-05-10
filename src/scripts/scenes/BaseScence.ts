@@ -15,11 +15,18 @@ export default class BaseScene extends Phaser.Scene {
     protected start?:any
     protected delete?: any
     protected deleteAll?: any
+    protected reset?: any
     protected inputIndex!: number
-    protected noteX = 400
-    protected noteY = 620 
-    protected noteGroup?: Phaser.GameObjects.Group
+    protected noteX = 375
+    protected noteY = 655
+    protected noteLeft!: any
+    protected noteRight!: any
+    protected noteUp!: any 
+    protected noteDown!: any
+    protected noteGroup!: Phaser.GameObjects.Group
     protected message?: any
+    protected initialPlayerX!: number;
+    protected initialPlayerY!: number;
 
     protected soundLeft!: Phaser.Sound.BaseSound
     protected soundRight!: Phaser.Sound.BaseSound
@@ -36,12 +43,15 @@ export default class BaseScene extends Phaser.Scene {
     create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string) {
         this.add.image(400, 300, imageName)
 
+        this.initialPlayerX = playerX;
+        this.initialPlayerY = playerY;
+        
         this.inputIndex = 0;
         
         //add menu?
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
-        .on('pointerdown', ()=>this.goToTitle());
+        .on('pointerdown', ()=>this.scene.start('LevelMenu'));
         this.path.setScale(0.8);
 
         this.question = this.add.image(1100, 50, 'mark')
@@ -85,12 +95,17 @@ export default class BaseScene extends Phaser.Scene {
 
         this.deleteAll = this.add.image(970, 750, "deleteAll");
         this.deleteAll.setInteractive();
+
+        this.reset = this.add.image(1070, 750, "reset");
+        this.reset.setInteractive();
+        
         
         //add group to notes
         this.noteGroup = this.add.group();
 
         this.userInput = []
-        this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup);
+        //this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
+            //this.noteUp, this.noteDown);
         
         // Animations
 		this.anims.create({
@@ -121,12 +136,10 @@ export default class BaseScene extends Phaser.Scene {
 
         this.player.setCollideWorldBounds(true)
 
-
         //add instruction
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
         .on('pointerdown', ()=>this.instruction.setVisible(false));
         this.instruction.setDepth(2)
-        
     }
 
     onCollision(_playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
@@ -150,40 +163,45 @@ export default class BaseScene extends Phaser.Scene {
         }
     }
 
-    protected editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group){
-        if (userInput.length <= 15){
+    protected editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group,
+        noteLeft: string, noteRight: string, noteUp: string, noteDown: string){
             this.left.on('pointerdown', () => {
                 userInput.push("left")
-                noteGroup.add(this.add.text(noteX, noteY, "←", { color: "#FF0000", font: "20px Times New Roman"}))
-                noteX += 25
+                //const image = this.add.image(noteX, noteY, noteLeft);
+                noteGroup.add(this.add.image(noteX, noteY, noteLeft));
+                //text(noteX, noteY, "←", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteX += 20
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
             this.right.on('pointerdown', () => {
                 userInput.push("right")
-                noteGroup.add(this.add.text(noteX, noteY, "→", { color: "#FF0000", font: "20px Times New Roman"}))
-                noteX += 25
+                //noteGroup.add(this.add.text(noteX, noteY, "→", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteGroup.add(this.add.image(noteX, noteY, noteRight));
+                noteX += 20
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
             this.up.on('pointerdown', () => {
                 userInput.push("up")
-                noteGroup.add(this.add.text(noteX, noteY, "↑", { color: "#FF0000", font: "20px Times New Roman"}))
-                noteX += 25
+                //noteGroup.add(this.add.text(noteX, noteY, "↑", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteGroup.add(this.add.image(noteX, noteY, noteUp));
+                noteX += 20
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
             this.down.on('pointerdown', () => {
                 userInput.push("down")
-                noteGroup.add(this.add.text(noteX, noteY, "↓", { color: "#FF0000", font: "20px Times New Roman"}))
-                noteX += 25
+                //noteGroup.add(this.add.text(noteX, noteY, "↓", { color: "#FF0000", font: "20px Times New Roman"}))
+                noteGroup.add(this.add.image(noteX, noteY, noteDown));
+                noteX += 20
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
             this.delete.on('pointerdown', () => {
                 userInput.pop()
-                if(noteX > 400){
-                    noteX -= 25
+                if(noteX > 375){
+                    noteX -= 20
                 }
                 this.destroyLast(noteGroup)
                 console.log(userInput)
@@ -191,12 +209,18 @@ export default class BaseScene extends Phaser.Scene {
             });
             this.deleteAll.on('pointerdown', () => {
                 userInput.length = 0;
-                noteX = 400
+                noteX = 375
                 noteGroup.clear(true, true);
                 console.log(userInput)
                 console.log("noteX = ",noteX)
             });
-        }
+            this.reset.on('pointerdown', () => {
+                this.player.x = this.initialPlayerX;
+                this.player.y = this.initialPlayerY; 
+                userInput.length = 0;
+                noteGroup.clear(true, true);
+                noteX = 375
+            });
         /* else{
             this.message = this.add.text(500, 250, 'Too many notes!', 
             { font: '20px Monospace', 
@@ -235,11 +259,10 @@ export default class BaseScene extends Phaser.Scene {
                     inputIndex++
                 }
                 setTimeout(() => this.movePlayer(player, soundLeft, soundRight, soundUp, soundDown, userInput, inputIndex), 700);
-
             }
             else{
-                userInput.length = 0;
-                inputIndex = 0;
+                /* userInput.length = 0;
+                inputIndex = 0; */
             }
         }
 
