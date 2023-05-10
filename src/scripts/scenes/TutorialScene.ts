@@ -1,4 +1,3 @@
-import Phaser from 'phaser'
 import BaseScene from './BaseScence'
 
 export default class TutorialScene extends BaseScene {
