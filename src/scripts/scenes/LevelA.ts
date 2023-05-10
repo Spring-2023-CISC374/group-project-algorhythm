@@ -14,7 +14,13 @@ export default class LevelA extends BaseScene{
       this.soundDown = this.sound.add("e3_sound")
       this.soundLeft = this.sound.add("g5_sound")
       this.soundRight = this.sound.add("d2_sound")
-  
+      
+      this.levelSound = this.sound.add("levelAPreview"); 
+      const song_instructions = this.add.image(85, 320, 'note');
+      song_instructions.setInteractive();
+      song_instructions.on('pointerdown', () => this.levelSound.play())
+
+
       const goal1 = this.physics.add.sprite(965, 520, 'star');
       const goal2 = this.physics.add.sprite(550, 130, 'star');
       const goal3 = this.physics.add.sprite(445, 230, 'star');
