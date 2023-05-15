@@ -129,12 +129,19 @@ export default class BaseScene extends Phaser.Scene {
         this.player.setDepth(1)
         this.goals = this.physics.add.group();
         this.goalsLeft = 0;
+        
+        this.physics.add.collider(this.player, this.goals);
+        this.physics.add.overlap(
+            this.player,
+            this.goals,
+            this.handleCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+            undefined,
+            this
+          );
 
-        this.physics.add.collider(this.player, this.goals, this.onCollision, undefined, this)
 
         this.physics.world.setBounds(300, 20, 700, 520);
-
-        this.player.setCollideWorldBounds(true)
+        this.player.setCollideWorldBounds(true);
 
         //add instruction
         this.instruction = this.add.image(650, 400, 'instruction').setInteractive().setVisible(false)
@@ -142,16 +149,19 @@ export default class BaseScene extends Phaser.Scene {
         this.instruction.setDepth(2)
     }
 
-    onCollision(_playerObj: Phaser.GameObjects.GameObject, goalObj: Phaser.GameObjects.GameObject) {
-        //const player = playerObj as Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-        const goal = goalObj as Phaser.Physics.Arcade.Sprite;
-    
+    private handleCollision(
+        playerObj: Phaser.Physics.Arcade.Sprite,
+        goalObj: Phaser.Physics.Arcade.Sprite
+      ) {
+        const player = playerObj;
+        const goal = goalObj;
+      
         goal.destroy();
-    
+        player.setAlpha(0.5);
         this.goalsLeft--;
-    
+      
         if (this.goalsLeft === 0) {
-            this.scene.start('EndScene');
+          this.scene.start('EndScene');
         }
     }
 

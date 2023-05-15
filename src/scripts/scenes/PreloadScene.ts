@@ -1,4 +1,26 @@
 import Phaser from 'phaser'
+import city from '/assets/images/city.png'
+import title from '/assets/images/title.jpg'
+import levelselect from '/assets/images/levelselect.jpg'
+import mountain from '/assets/images/mountain.png'
+import end from '/assets/images/end.png'
+import endScreen from '/assets/images/endscreen.jpg'
+
+import arrow from '/assets/images/arrow.png'
+import mark from '/assets/images/mark.png'
+import right from '/assets/images/right.png'
+import left from '/assets/images/left.png'
+import up from '/assets/images/up.png'
+import down from '/assets/images/down.png'
+
+import deleteB from '/assets/images/delete.png'
+import deleteAll from  '/assets/images/deleteAll.png'
+import paper from '/assets/images/paper.png'
+import note from '/assets/images/note.png'
+import map from '/assets/images/map.png'
+import start from '/assets/images/start.png'
+import reset from '/assets/images/reset.png'
+
 
 export default class PreloadScene extends Phaser.Scene {
   
@@ -8,28 +30,29 @@ export default class PreloadScene extends Phaser.Scene {
   
     preload() {
       // background
-        this.load.image('city', 'assets/images/city.png');
-        this.load.image('levelselect', 'assets/images/levelselect.jpg')
-        this.load.image('title', 'assets/images/title.jpg');
-        this.load.image('mountain', 'assets/images/mountain.png');        
-        this.load.image('end', 'assets/images/end.png'); 
-        this.load.image('endscreen', 'assets/images/endscreen.jpg');
+        this.load.image('city', city);
+        this.load.image('title', title);
+        this.load.image('levelselect', levelselect);
+        this.load.image('mountain', mountain);        
+        this.load.image('end', end); 
+        this.load.image('endscreen', endScreen);
 
 
       // layout
-        this.load.image('arrow', 'assets/images/arrow.png');
-        this.load.image('mark', 'assets/images/mark.png');
-        this.load.image('right', 'assets/images/right.png');
-        this.load.image('left', 'assets/images/left.png');
-        this.load.image('up', 'assets/images/up.png');
-        this.load.image('down', 'assets/images/down.png');
-        this.load.image('delete', 'assets/images/delete.png');
-        this.load.image('deleteAll', 'assets/images/deleteAll.png');
-        this.load.image('paper','assets/images/paper.png');
-        this.load.image('note', 'assets/images/note.png');
-        this.load.image('map', 'assets/images/map.png');
-        this.load.image('start', 'assets/images/start.png');
-        this.load.image('reset', 'assets/images/reset.png');
+        this.load.image('arrow', arrow);
+        this.load.image('mark', mark);
+        this.load.image('right', right);
+        this.load.image('left', left);
+        this.load.image('up', up);
+        this.load.image('down', down);
+
+        this.load.image('delete', deleteB);
+        this.load.image('deleteAll', deleteAll);
+        this.load.image('paper', paper);
+        this.load.image('note', note);
+        this.load.image('map', map);
+        this.load.image('start', start);
+        this.load.image('reset', reset);
       
       // sprite
         this.load.spritesheet('guy_up', "assets/sprites/sprite_up.png", {frameWidth: 64, frameHeight: 51});
