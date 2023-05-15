@@ -61,7 +61,7 @@ export default class LevelB extends BaseScene{
         
       this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
       this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
-        this.noteUp, this.noteDown);
+        this.noteUp, this.noteDown, 'LevelB');
       }
   
 }
