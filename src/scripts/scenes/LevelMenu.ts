@@ -11,7 +11,7 @@ export default class LevelMenu extends Phaser.Scene{
     }
     
     create(){
-        this.add.image(500, 450, 'mountain')
+        this.add.image(500, 450, 'levelselect')
 
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
