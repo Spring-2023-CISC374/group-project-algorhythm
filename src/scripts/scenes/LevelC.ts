@@ -7,7 +7,8 @@ export default class LevelC extends BaseScene {
     
     create() {
       console.log('level c');
-      super.create('mountain', 'Level C', 444, 20, 'guy_down');
+      this.levelName = 'LevelC';
+      super.create('mountain', 'Itsy Bitsy\nSpider', 444, 20, 'guy_down');
       this.add.image(650, 32, 'map');
 
      //add sounds
@@ -56,6 +57,6 @@ export default class LevelC extends BaseScene {
       
       this.start.on('pointerdown', () => this.movePlayer(this.player, this.soundLeft, this.soundRight, this.soundUp, this.soundDown, this.userInput, this.inputIndex));
       this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
-        this.noteUp, this.noteDown);
+        this.noteUp, this.noteDown, 'LevelC');
       }
 }

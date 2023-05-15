@@ -34,6 +34,7 @@ export default class BaseScene extends Phaser.Scene {
     protected soundDown!: Phaser.Sound.BaseSound
 
     protected levelSound!: Phaser.Sound.BaseSound
+    protected levelName?: string
 
 
     constructor(KeyName: string) {
@@ -174,7 +175,7 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     protected editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group,
-        noteLeft: string, noteRight: string, noteUp: string, noteDown: string){
+        noteLeft: string, noteRight: string, noteUp: string, noteDown: string, LevelName: string){
             this.left.on('pointerdown', () => {
                 userInput.push("left")
                 //const image = this.add.image(noteX, noteY, noteLeft);
@@ -225,11 +226,7 @@ export default class BaseScene extends Phaser.Scene {
                 console.log("noteX = ",noteX)
             });
             this.reset.on('pointerdown', () => {
-                this.player.x = this.initialPlayerX;
-                this.player.y = this.initialPlayerY; 
-                userInput.length = 0;
-                noteGroup.clear(true, true);
-                noteX = 375
+                this.scene.start(LevelName);
             });
         /* else{
             this.message = this.add.text(500, 250, 'Too many notes!', 
