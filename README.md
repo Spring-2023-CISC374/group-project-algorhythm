@@ -1,4 +1,16 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10594849&assignment_repo_type=AssignmentRepo)
-# group-game-project
+# Algorhythm
 
-This assignment is where you will submit your code for your MVP as well as the rest of the versions of your educational game.
+## Members & Contributions
+
+#### Anthony Andujar
+- Music/Sound implementation
+
+#### Harleen Chahal
+- Sprite and sprite's animation.
+
+#### Andrew Geraci
+- Buttons to move sprite.
+
+#### Yuhan Lin
+- Creating different scenes for future game content.
+- Work with layout and background.
