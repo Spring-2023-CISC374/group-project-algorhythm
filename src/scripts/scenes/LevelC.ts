@@ -8,7 +8,7 @@ export default class LevelC extends BaseScene {
     create() {
       console.log('level c');
       this.levelName = 'LevelC';
-      super.create('mountain', 'Itsy Bitsy\nSpider', 444, 20, 'guy_down');
+      super.create('mountain', 'Itsy Bitsy\nSpider', 444, 20, 'guy_down', "levelCPreview");
       this.add.image(650, 32, 'map');
 
      //add sounds
@@ -23,11 +23,7 @@ export default class LevelC extends BaseScene {
       this.noteUp = "10"
       this.noteDown = "8"
 
-      this.levelSound = this.sound.add("levelCPreview"); 
-      const song_instructions = this.add.image(105, 320, 'note');
-      song_instructions.setInteractive();
-      song_instructions.on('pointerdown', () => this.levelSound.play())
-
+      // add starts for this level
       const goal1 = this.physics.add.sprite(650, 220, 'star');
       const goal2 = this.physics.add.sprite(550, 130, 'star');
       const goal3 = this.physics.add.sprite(345, 30, 'star');

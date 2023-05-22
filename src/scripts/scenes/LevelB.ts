@@ -7,7 +7,7 @@ export default class LevelB extends BaseScene{
 
     create() {
       console.log('level b');
-      super.create('mountain', 'Old MacDonald', 444, 120, 'guy_down');
+      super.create('mountain', 'Old MacDonald', 444, 120, 'guy_down',"levelBPreview");
       this.add.image(650, 32, 'map');
       
       //add sounds
@@ -22,11 +22,7 @@ export default class LevelB extends BaseScene{
       this.noteUp = "1"
       this.noteDown = "3"
 
-      this.levelSound = this.sound.add("levelBPreview"); 
-      const song_instructions = this.add.image(105, 320, 'note');
-      song_instructions.setInteractive();
-      song_instructions.on('pointerdown', () => this.levelSound.play())
-
+      // add starts for this level
       const goal1 = this.physics.add.sprite(965, 420, 'star');
       const goal2 = this.physics.add.sprite(650, 330, 'star');
       const goal3 = this.physics.add.sprite(550, 230, 'star');

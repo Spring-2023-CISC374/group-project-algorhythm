@@ -7,6 +7,7 @@ export default class EndScene extends Phaser.Scene {
   
     create() {
       // code from Spanish Shopping Expedition
+      // make player return to level menu
       this.add.image(700, 400, "endscreen")
       .setInteractive()
       .on('pointerdown', ()=>this.scene.start('LevelMenu'));

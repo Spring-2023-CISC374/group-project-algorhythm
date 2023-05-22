@@ -6,11 +6,13 @@ export default class LevelA extends BaseScene{
     }
 
     create() {
+      // creat basic elements
       console.log('level a');
       this.levelName = 'LevelA';
-      super.create('mountain', 'Mary Had A\nLittle Lamb', 444, 120, 'guy_down');
+      super.create('mountain', 'Mary Had A\nLittle Lamb', 444, 120, 'guy_down', "levelAPreview");
       this.add.image(650, 32, 'map');
-        //add sounds
+        
+      //add sounds
       this.soundUp = this.sound.add("c1_sound")
       this.soundDown = this.sound.add("e3_sound")
       this.soundLeft = this.sound.add("g5_sound")
@@ -21,13 +23,8 @@ export default class LevelA extends BaseScene{
       this.noteRight = "2"
       this.noteUp = "1"
       this.noteDown = "3"
-      
-      this.levelSound = this.sound.add("levelAPreview"); 
-      const song_instructions = this.add.image(105, 320, 'note');
-      song_instructions.setInteractive();
-      song_instructions.on('pointerdown', () => this.levelSound.play())
 
-
+      // add starts for this level
       const goal1 = this.physics.add.sprite(965, 520, 'star');
       const goal2 = this.physics.add.sprite(550, 130, 'star');
       const goal3 = this.physics.add.sprite(445, 230, 'star');
