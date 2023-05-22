@@ -1,20 +1,26 @@
 import BaseScene from './BaseScence'
 
+/* This scene is a prototype
+as a guide for all other levels */
+
+
 export default class Level1 extends BaseScene {
     constructor() {
       super('Level1');
     }
+
     
     create() {
+      // creat basic elements
       console.log('level 1');
-      super.create('mountain', 'Level 1', 444, 20, 'guy_down');
+      super.create('mountain', 'Level 1', 444, 20, 'guy_down', "g5_sound");
       this.add.image(650, 32, 'map');
       
-      //COPY THIS
+     /*  //COPY THIS
       this.levelSound = this.sound.add("g5_sound"); 
       const song_instructions = this.add.image(85, 320, 'note');
       song_instructions.setInteractive();
-      song_instructions.on('pointerdown', () => this.levelSound.play())
+      song_instructions.on('pointerdown', () => this.levelSound.play()) */
 
       //add sounds
       this.soundUp = this.sound.add("g5_sound")
@@ -23,6 +29,7 @@ export default class Level1 extends BaseScene {
       this.soundRight = this.sound.add("e3_sound")
 
 
+      // add starts for this level
       const goal1 = this.physics.add.sprite(865, 320, 'star');
       const goal2 = this.physics.add.sprite(550, 30, 'star');
       const goal3 = this.physics.add.sprite(445, 130, 'star');

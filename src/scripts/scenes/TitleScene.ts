@@ -10,14 +10,17 @@ export default class TitleScene extends Phaser.Scene{
     }
     
     create(){
+        // background
         this.add.image(500, 450, 'title')
         //this.add.text(200, 100, "Algorhythm", { color: "#FFFFFF", font: "120px Times New Roman"})
 
+        // go to level menu
         this.button1 = this.add.rectangle(850, 500, 200, 100, 0xdadaaa)
         .setInteractive()
         .on('pointerdown', ()=>this.goToLevel());
         this.button1.setScale(0.8); 
 
+        //go to tutorial scene
         this.button2 = this.add.rectangle(350, 500, 200, 100, 0xaadada)
         .setInteractive()
         .on('pointerdown', ()=>this.goToTutorial());

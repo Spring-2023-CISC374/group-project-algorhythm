@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"homepage": "https://pink-hat-hacker.github.io/group-project-algorhythm-test/",
+	"homepage": "https://spring-2023-cisc374.github.io/group-project-algorhythm/",
 	"scripts": {
 		"start": "vite",
 		"build": "tsc && vite build",

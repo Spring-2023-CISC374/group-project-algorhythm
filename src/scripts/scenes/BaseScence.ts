@@ -41,15 +41,23 @@ export default class BaseScene extends Phaser.Scene {
       super(KeyName);
     }
   
-    create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string) {
+    create(imageName: string, levelName: string, playerX: number, playerY: number, playerState: string, levelPrview: string) {
+        // add background
         this.add.image(400, 300, imageName)
 
+        this.levelSound = this.sound.add(levelPrview); 
+        const song_instructions = this.add.image(85, 320, 'note');
+        song_instructions.setInteractive();
+        song_instructions.on('pointerdown', () => this.levelSound.play())
+
+        // Record the initial position of the sprite for the reset button
         this.initialPlayerX = playerX;
         this.initialPlayerY = playerY;
         
+        // Set user input to initial value
         this.inputIndex = 0;
         
-        //add menu?
+        //add button to show instruction and make player able to return to the previous page
         this.path = this.add.image(1220, 50, 'arrow')
         .setInteractive()
         .on('pointerdown', ()=>this.scene.start('LevelMenu'));
@@ -69,10 +77,7 @@ export default class BaseScene extends Phaser.Scene {
 			color: '#222222'
 		})
 
-        //add note (level specific now)
-        //this.add.image(85, 320, 'note')
-
-        //add map
+        //add board
         this.add.image(650, 320, 'map')
 
         //add buttons
@@ -126,11 +131,13 @@ export default class BaseScene extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('guy_right', {start:0, end:3}), frameRate: 13, repeat: -1
 		});
 
+        // draw player
         this.player = this.physics.add.sprite(playerX, playerY, playerState);
         this.player.setDepth(1)
         this.goals = this.physics.add.group();
         this.goalsLeft = 0;
         
+        // make player collide with goal 
         this.physics.add.collider(this.player, this.goals);
         this.physics.add.overlap(
             this.player,
@@ -140,7 +147,7 @@ export default class BaseScene extends Phaser.Scene {
             this
           );
 
-
+        // set boundary for game board, make sprite unable to move outside the board
         this.physics.world.setBounds(300, 20, 700, 520);
         this.player.setCollideWorldBounds(true);
 
@@ -149,7 +156,8 @@ export default class BaseScene extends Phaser.Scene {
         .on('pointerdown', ()=>this.instruction.setVisible(false));
         this.instruction.setDepth(2)
     }
-
+    
+    // collision for player and goal
     private handleCollision(
         playerObj: Phaser.Physics.Arcade.Sprite,
         goalObj: Phaser.Physics.Arcade.Sprite
@@ -166,6 +174,7 @@ export default class BaseScene extends Phaser.Scene {
         }
     }
 
+    // For delete button, delete last note in the group
     private destroyLast(noteGroup: Phaser.GameObjects.Group) {
         const last = noteGroup.getChildren()[noteGroup.getChildren().length - 1] as Phaser.GameObjects.Text;
 
@@ -174,6 +183,7 @@ export default class BaseScene extends Phaser.Scene {
         }
     }
 
+    // Handling user input
     protected editInput(userInput:Array<string>, noteX: number, noteY:number, noteGroup:Phaser.GameObjects.Group,
         noteLeft: string, noteRight: string, noteUp: string, noteDown: string, LevelName: string){
             this.left.on('pointerdown', () => {
@@ -237,6 +247,7 @@ export default class BaseScene extends Phaser.Scene {
         } */
     }
     
+    // Make sprite move
 	protected movePlayer(player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody, soundLeft: Phaser.Sound.BaseSound,
         soundRight: Phaser.Sound.BaseSound, soundUp: Phaser.Sound.BaseSound, soundDown: Phaser.Sound.BaseSound, 
         userInput:Array<string>, inputIndex: number) {

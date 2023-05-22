@@ -7,7 +7,7 @@ export default class TutorialScene extends BaseScene {
     }
   
     create() {
-        super.create('mountain', 'Tutorial', 340, 320, 'guy_right');
+        super.create('mountain', 'Tutorial', 340, 320, 'guy_right', "tutorialPreview");
 
         //this.player = this.physics.add.sprite(340, 320, 'guy_right');
         const goal1 = this.physics.add.sprite(655, 320, 'star');
@@ -28,15 +28,6 @@ export default class TutorialScene extends BaseScene {
         this.noteUp = "6"
         this.noteDown = "1"
 
-        this.levelSound = this.sound.add("tutorialPreview"); 
-        const song_instructions = this.add.image(105, 320, 'note');
-        song_instructions.setInteractive();
-        song_instructions.on('pointerdown', () => this.levelSound.play())
-
-        /* this.goal = this.add.image(655,320,'star')
-        .setInteractive()
-        .on('pointerdown', ()=>this.goToEnd());
-        this.path.setScale(0.8); */
 
         //add trees 
         this.add.image(660, 200, 'tree1')
@@ -53,6 +44,8 @@ export default class TutorialScene extends BaseScene {
         //add instruction
         this.instruction.setVisible(true)
 
+        // Since the previous page of the tutorial is the main menu, 
+        // override the back button so that it does not return to the level menu
         this.path.removeAllListeners();
         this.path.on('pointerdown', ()=>this.scene.start('TitleScene'));
 
@@ -64,7 +57,7 @@ export default class TutorialScene extends BaseScene {
             this.soundUp, this.soundDown, this.userInput, this.inputIndex), 700);
       });
         this.editInput(this.userInput, this.noteX, this.noteY, this.noteGroup, this.noteLeft, this.noteRight,
-          this.noteUp, this.noteDown);
+          this.noteUp, this.noteDown, 'Tutorial');
 	}
 
 }
