@@ -46,7 +46,7 @@ export default class BaseScene extends Phaser.Scene {
         this.add.image(400, 300, imageName)
 
         this.levelSound = this.sound.add(levelPrview); 
-        const song_instructions = this.add.image(85, 320, 'note');
+        const song_instructions = this.add.image(100, 320, 'note');
         song_instructions.setInteractive();
         song_instructions.on('pointerdown', () => this.levelSound.play())
 
